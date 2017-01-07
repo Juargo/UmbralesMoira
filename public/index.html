@@ -1,6 +1,71 @@
-<html >
-
+<html ng-app="graphApp">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/jqplot/1.0.8/jquery.jqplot.min.js"></script>
+
+    <script type="text/javascript" src="src/jqplot.canvasTextRenderer.js"></script>
+    <script type="text/javascript" src="src/jqplot.highlighter.js"></script>
+    <script type="text/javascript" src="src/jqplot.dateAxisRenderer.js"></script>
+    <script type="text/javascript" src="src/jqplot.dragable.js"></script>
+    <script type="text/javascript" src="src/jqplot.canvasAxisTickRenderer.js"></script>
+    <link rel="stylesheet" type="text/css" href="/src/jquery.jqplot.css" />
+
+    <script>
+        angular.module("graphApp",[])
+        .controller("graphCtrl",function ($scope) {  
+            var puntosn=[];
+                var pw1=[];
+                var pw2=[];
+                var urlg = "aliasByNode(summarize(gwpromo.compra.general.estado.Ok, \"10min\", \"sum\"), 4)"
+                $.get("http://localhost:3000/getdataGraph?formula=" + urlg ,function( data ) {
+                    data = JSON.parse(data);
+                    puntos = data[0].datapoints;
+                    cantidad = puntos.length;
+                    for (var i = 0; i < puntos.length; i++) {
+                        var t = new Date(puntos[i][1] * 1000);
+                        var tt = t.toGMTString();
+                        var tt = tt.substr(0,25);
+                        ptos_c =puntos[i][0]+0
+                        puntosn.push([tt,ptos_c]);
+                  
+                        if(ptos_c < 10){
+                            pw2.push([tt,0]);
+                        }else{
+                            pw2.push([tt,ptos_c*1.2]);
+                        }
+                   
+                        pw1.push([tt,puntos[i][0]*0.8]);
+                    }
+                    $.jqplot.config.enablePlugins = true;
+                    data = [puntosn,pw1,pw2] ;
+
+                    plot1 = $.jqplot('myChart',data,{
+                        title: "Umbrales",
+                        axes:{
+                            xaxis:{
+                                renderer: $.jqplot.DateAxisRenderer,
+                                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                                tickOptions:{
+                                    formatString: "%H:%M",
+                                    angle:-45
+                                }
+                            }
+                        },
+                        highligther:{
+                            sizeAdjust:10,
+                            tooltipLocation:'n',
+                            tooltipAxes:'both',
+                            tooltipFormatString:'<b><i><span>%s , </span></i></b> %.2f',
+                            useAxesFormatters:false
+                        }
+                    })
+                })
+        })
+    </script>
 </head>
 
 <body>
@@ -9,7 +74,10 @@
         <div id="formulas"></div>
     </div>
     <div id="body">
-        <div id="grafico"></div>
+        <div id="grafico" ng-controller="graphCtrl">
+            <div id="myChart" style="height:400p;width:1900px"></div>
+
+        </div>
         <div id="boton"></div>
     </div>
     <div id="foot"></div>
