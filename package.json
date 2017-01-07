@@ -1,0 +1,11 @@
+{
+  "name": "graph",
+  "version": "0.0.1",
+  "description": "test1",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "latest",
+    "mongoose": "latest"
+  }
+}
