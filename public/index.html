@@ -8,8 +8,16 @@
 
     <script>
         angular.module("graphApp", [])
-            .cotroller("graphFormulasCtrl", function ($scope) {
-
+            .controller("graphFormulasCtrl", function ($scope) {
+                $scope.options ={
+                    model: null,
+                    opciones:[
+                        {value: "05", text :"05 al 11 Dic"},
+                        {value: "12", text :"12 al 18 Dic"},
+                        {value: "19", text :"19 al 25 Dic"},
+                        {value: "26", text :"26 Dic al 01 Ene"}
+                    ]
+                }
             })
     </script>
 </head>
@@ -20,14 +28,11 @@
         <div id="formulas" ng-controller="graphFormulasCtrl">
             <form>
                 <input name="urlg" ng-model="urlg" />
-                <select>
-                    <option value="1">Semanal</option>
-                    <option value="2">Mensual</option>
-                    <option value="3">Anual</option>
-                    <option value="4">Fechas especificas</option>
+                <select  name="ngvalueselect" ng-model="options.model" >
+                    <option ng-repeat="option in options.opciones" ng-value="option.value">{{option.text}}</option>
                 </select>
             </form>
-
+            {{options.model}}
         </div>
     </div>
     <div id="body">
