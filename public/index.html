@@ -8,21 +8,14 @@
 
     <script>
         angular.module("graphApp",[])
-        .controller("graphCtrl",function ($scope,$compile) {  
-            $.ajax({
-                url:"http://localhost:3000/getmoiratriggers",
-                type: "GET",
-                success: function(data){
-                    $("#moiratriggers").append($compile(data)($scope));
-                }
-            });
-        })
     </script>
+
+    <script src="controllers/moiraController.js"></script>
 </head>
 
 <body>
     <div id="head">
-        <div id="moiratriggers" ng-controller="graphCtrl">
+        <div id="moiratriggers" ng-controller="moiraCtrl">
             {{selected}}
         </div>
         <div id="formulas"></div>
