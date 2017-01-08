@@ -18,6 +18,22 @@
                         {value: "26", text :"26 Dic al 01 Ene"}
                     ]
                 }
+
+            $scope.changeDias = function (){
+                $scope.dias =[
+                    {fi: parseInt($scope.options.model,10),ff:parseInt($scope.options.model,10)+1,class:"active",nombre:"Lunes"},
+                    {fi: parseInt($scope.options.model,10)+1,ff:parseInt($scope.options.model,10)+2,class:"active",nombre:"Martes"},
+                    {fi: parseInt($scope.options.model,10)+2,ff:parseInt($scope.options.model,10)+3,class:"active",nombre:"Miercoles"},
+                    {fi: parseInt($scope.options.model,10)+3,ff:parseInt($scope.options.model,10)+4,class:"active",nombre:"Jueves"},
+                    {fi: parseInt($scope.options.model,10)+4,ff:parseInt($scope.options.model,10)+5,class:"active",nombre:"Viernes"},
+                    {fi: parseInt($scope.options.model,10)+5,ff:parseInt($scope.options.model,10)+6,class:"active",nombre:"Sabado"},
+                    {fi: parseInt($scope.options.model,10)+6,ff:parseInt($scope.options.model,10)+7,class:"active",nombre:"Domingo"},
+                ]
+            }
+
+
+
+
             })
     </script>
 </head>
@@ -28,11 +44,11 @@
         <div id="formulas" ng-controller="graphFormulasCtrl">
             <form>
                 <input name="urlg" ng-model="urlg" />
-                <select  name="ngvalueselect" ng-model="options.model" >
+                <select  name="ngvalueselect" ng-model="options.model" ng-change="changeDias()">
                     <option ng-repeat="option in options.opciones" ng-value="option.value">{{option.text}}</option>
                 </select>
             </form>
-            {{options.model}}
+            {{dias}}
         </div>
     </div>
     <div id="body">
