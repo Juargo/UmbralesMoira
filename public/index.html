@@ -10,30 +10,52 @@
         angular.module("graphApp", []);
     </script>
 <script src="controllers/moiraController.js"></script>
+    <style>
+    :root {
+  --color-text: #04396C;
+}
+        body{
+            background: lightgray
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container-fluid">
-        <div class="row" id="head-moira">
-            <div class="col-md-4"><h1><strong style="
-    color: #b7b2b2;
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.65);
-">1#</strong></h1></div>
-            <div class="col-md-4">
-                <div class="row">
-                    Selecciona la medición creada en moira para configurar sus umbrales semanales
-                </div>
-                <div class="row">
-                    <div id="moiratriggers" ng-controller="moiraCtrl">
+        <div class="row" id="head-moira" style="border-bottom: 4px solid;
+}">
+            <div class="col-md-2">
+                <h1>
+                    <strong style="
+    color: var(--color-text);
+    -webkit-text-stroke: 1px var(--color-text);;
+">1#</strong>
+</h1>
+</div>
+<div class="col-md-8">
+    <div class="row" style="
+    margin-left: 5px;
+">
+        <h4 style="
+    color: var(--color-text);">Selecciona el <kbd>Trigger</kbd> moira para configurar sus umbrales diarios</h4>
+    </div>
+    <div class="row">
+        <div id="moiratriggers" ng-controller="moiraCtrl" style="
+    margin-bottom: 8px;
+">
             {{selected}}
         </div>
-                </div>
-            </div>
-            <div class="col-md-4"><img src="images/moira.png" alt=""></div>
-        </div>
     </div>
+</div>
+<div class="col-md-2"><h1><img src="images/moira.png" alt=""></h1></div>
 
-   
+</div>
+</div>
+
+
 </body>
 
 </html>
