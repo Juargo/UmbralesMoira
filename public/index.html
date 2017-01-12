@@ -20,14 +20,15 @@
                 }
 
             $scope.changeDias = function (){
+                base=parseInt($scope.options.model,10);
                 $scope.dias =[
-                    {fi: parseInt($scope.options.model,10),ff:parseInt($scope.options.model,10)+1,class:"active",nombre:"Lunes"},
-                    {fi: parseInt($scope.options.model,10)+1,ff:parseInt($scope.options.model,10)+2,class:"active",nombre:"Martes"},
-                    {fi: parseInt($scope.options.model,10)+2,ff:parseInt($scope.options.model,10)+3,class:"active",nombre:"Miercoles"},
-                    {fi: parseInt($scope.options.model,10)+3,ff:parseInt($scope.options.model,10)+4,class:"active",nombre:"Jueves"},
-                    {fi: parseInt($scope.options.model,10)+4,ff:parseInt($scope.options.model,10)+5,class:"active",nombre:"Viernes"},
-                    {fi: parseInt($scope.options.model,10)+5,ff:parseInt($scope.options.model,10)+6,class:"active",nombre:"Sabado"},
-                    {fi: parseInt($scope.options.model,10)+6,ff:parseInt($scope.options.model,10)+7,class:"active",nombre:"Domingo"},
+                    {fi: base,ff: base +1,class:"active",nombre:"Lunes"},
+                    {fi: base+1,ff:base+2,class:"active",nombre:"Martes"},
+                    {fi: base+2,ff:base+3,class:"active",nombre:"Miercoles"},
+                    {fi: base+3,ff:base+4,class:"active",nombre:"Jueves"},
+                    {fi: base+4,ff:base+5,class:"active",nombre:"Viernes"},
+                    {fi: base+5,ff:base+6,class:"active",nombre:"Sabado"},
+                    {fi: base+6,ff:base+7,class:"active",nombre:"Domingo"},
                 ]
             }
 
