@@ -7,8 +7,8 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
     <script>
-        angular.module("graphApp", [])
-            .controller("graphFormulasCtrl", function ($scope) {
+        angular.module("graphApp", []);
+       .controller("graphFormulasCtrl", function ($scope) {
                 $scope.options ={
                     model: null,
                     opciones:[
@@ -37,12 +37,54 @@
 
             })
     </script>
+<script src="controllers/moiraController.js"></script>
+    <style>
+    :root {
+  --color-text: #04396C;
+}
+        body{
+            background: lightgray
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="head">
-        <div id="moiratriggers"></div>
-        <div id="formulas" ng-controller="graphFormulasCtrl">
+    <div class="container-fluid">
+        <div class="row" id="head-moira" style="border-bottom: 4px solid;
+}">
+            <div class="col-md-2">
+                <h1>
+                    <strong style="
+    color: var(--color-text);
+    -webkit-text-stroke: 1px var(--color-text);;
+">1#</strong>
+</h1>
+</div>
+<div class="col-md-8">
+    <div class="row" style="
+    margin-left: 5px;
+">
+        <h4 style="
+    color: var(--color-text);">Selecciona el <kbd>Trigger</kbd> moira para configurar sus umbrales diarios</h4>
+
+    </div>
+    <div class="row">
+        <div id="moiratriggers" ng-controller="moiraCtrl" style="
+    margin-bottom: 8px;
+">
+            {{selected}}
+        </div>
+    </div>
+</div>
+<div class="col-md-2"><h1><img src="images/moira.png" alt=""></h1></div>
+
+</div>
+</div>
+
+<div id="formulas" ng-controller="graphFormulasCtrl">
             <form>
                 <input name="urlg" ng-model="urlg" />
                 <select  name="ngvalueselect" ng-model="options.model" ng-change="changeDias()">
@@ -51,12 +93,6 @@
             </form>
             {{dias}}
         </div>
-    </div>
-    <div id="body">
-        <div id="grafico"></div>
-        <div id="boton"></div>
-    </div>
-    <div id="foot"></div>
 </body>
 
 </html>
