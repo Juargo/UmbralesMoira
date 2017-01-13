@@ -8,36 +8,10 @@
 
     <script>
         angular.module("graphApp", []);
-       .controller("graphFormulasCtrl", function ($scope) {
-                $scope.options ={
-                    model: null,
-                    opciones:[
-                        {value: "05", text :"05 al 11 Dic"},
-                        {value: "12", text :"12 al 18 Dic"},
-                        {value: "19", text :"19 al 25 Dic"},
-                        {value: "26", text :"26 Dic al 01 Ene"}
-                    ]
-                }
-
-            $scope.changeDias = function (){
-                base=parseInt($scope.options.model,10);
-                $scope.dias =[
-                    {fi: base,ff: base +1,class:"active",nombre:"Lunes"},
-                    {fi: base+1,ff:base+2,class:"active",nombre:"Martes"},
-                    {fi: base+2,ff:base+3,class:"active",nombre:"Miercoles"},
-                    {fi: base+3,ff:base+4,class:"active",nombre:"Jueves"},
-                    {fi: base+4,ff:base+5,class:"active",nombre:"Viernes"},
-                    {fi: base+5,ff:base+6,class:"active",nombre:"Sabado"},
-                    {fi: base+6,ff:base+7,class:"active",nombre:"Domingo"},
-                ]
-            }
-
-
-
-
-            })
     </script>
 <script src="controllers/moiraController.js"></script>
+<script src="controllers/graphFomulasController.js"></script>
+
     <style>
     :root {
   --color-text: #04396C;
@@ -53,46 +27,48 @@
 
 <body>
     <div class="container-fluid">
-        <div class="row" id="head-moira" style="border-bottom: 4px solid;
-}">
+        <div class="row" id="head-moira" style="border-bottom: 4px solid;">
             <div class="col-md-2">
                 <h1>
-                    <strong style="
-    color: var(--color-text);
-    -webkit-text-stroke: 1px var(--color-text);;
-">1#</strong>
-</h1>
-</div>
-<div class="col-md-8">
-    <div class="row" style="
-    margin-left: 5px;
-">
-        <h4 style="
-    color: var(--color-text);">Selecciona el <kbd>Trigger</kbd> moira para configurar sus umbrales diarios</h4>
-
-    </div>
-    <div class="row">
-        <div id="moiratriggers" ng-controller="moiraCtrl" style="
-    margin-bottom: 8px;
-">
-            {{selected}}
+                    <strong style="color: var(--color-text);-webkit-text-stroke: 1px var(--color-text);">1#</strong>
+                </h1>
+            </div>
+            <div class="col-md-8">
+                <div class="row" style="margin-left: 5px;">
+                    <h4 style="color: var(--color-text);">Selecciona el <kbd>Trigger</kbd> moira para configurar sus umbrales diarios</h4>
+                </div>
+                <div class="row">
+                    <div id="moiratriggers" ng-controller="moiraCtrl" style="margin-bottom: 8px;">
+                        {{selected}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"><h1><img src="images/moira.png" alt=""></h1></div>
         </div>
-    </div>
-</div>
-<div class="col-md-2"><h1><img src="images/moira.png" alt=""></h1></div>
-
-</div>
-</div>
-
-<div id="formulas" ng-controller="graphFormulasCtrl">
-            <form>
-                <input name="urlg" ng-model="urlg" />
+        <div class="row"  style="border-bottom: 4px solid;">
+            <div class="col-md-2">
+                <h1>
+                    <strong style="color: var(--color-text);-webkit-text-stroke: 1px var(--color-text);">2#</strong>
+                </h1>
+            </div>
+            <div class="col-md-8">
+                <div class="row" style="margin-left: 5px;">
+                    <h4 style="color: var(--color-text);">Ingrese la <kbd>formula</kbd> y la semana a analizar</h4>
+                </div>
+                <div class="row">
+                    <div id="moiratriggers" ng-controller="graphFormulasCtrl" style="margin-bottom: 8px;">
+                        <input name="urlg" ng-model="urlg" />
                 <select  name="ngvalueselect" ng-model="options.model" ng-change="changeDias()">
                     <option ng-repeat="option in options.opciones" ng-value="option.value">{{option.text}}</option>
                 </select>
-            </form>
-            {{dias}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"><h1><img src="images/formula-icon.png" alt="" style="
+    height: 19%;
+"></h1></div>
         </div>
+    </div>
 </body>
 
 </html>
