@@ -17,72 +17,24 @@
     <script>
         angular.module("graphApp",[])
         .controller("graphCtrl",function ($scope) {  
-            var puntosn=[];
-                var pw1=[];
-                var pw2=[];
-                var urlg = "aliasByNode(summarize(gwpromo.compra.general.estado.Ok, \"10min\", \"sum\"), 4)"
-                $.get("http://localhost:3000/getdataGraph?formula=" + urlg ,function( data ) {
-                    data = JSON.parse(data);
-                    puntos = data[0].datapoints;
-                    cantidad = puntos.length;
-                    for (var i = 0; i < puntos.length; i++) {
-                        var t = new Date(puntos[i][1] * 1000);
-                        var tt = t.toGMTString();
-                        var tt = tt.substr(0,25);
-                        ptos_c =puntos[i][0]+0
-                        puntosn.push([tt,ptos_c]);
-                  
-                        if(ptos_c < 10){
-                            pw2.push([tt,0]);
-                        }else{
-                            pw2.push([tt,ptos_c*1.2]);
-                        }
-                   
-                        pw1.push([tt,puntos[i][0]*0.8]);
-                    }
-                    $.jqplot.config.enablePlugins = true;
-                    data = [puntosn,pw1,pw2] ;
-
-                    plot1 = $.jqplot('myChart',data,{
-                        title: "Umbrales",
-                        axes:{
-                            xaxis:{
-                                renderer: $.jqplot.DateAxisRenderer,
-                                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
-                                tickOptions:{
-                                    formatString: "%H:%M",
-                                    angle:-45
-                                }
-                            }
-                        },
-                        highligther:{
-                            sizeAdjust:10,
-                            tooltipLocation:'n',
-                            tooltipAxes:'both',
-                            tooltipFormatString:'<b><i><span>%s , </span></i></b> %.2f',
-                            useAxesFormatters:false
-                        }
-                    })
-                })
+            
         })
+        
     </script>
 
   <script src="controllers/graphFomulasController.js"></script>
   </head>
-<body>
+<body ng-controller="graphFormulasCtrl">
    
-    <div id="body">
+    <div id="body" >
       <div class="container-fluid">
         <div class="row" id="formulas">
-            <div class="col-md-1">
-                <h1><strong>2#</strong></h1>
-            </div>
             <div class="col-md-9">
                 <div class="row">
                     <h2>Ingrese la <kbd>formula</kbd> y la semana a analizar</h2>
                 </div>
                 <div class="row">
-                    <div id="formulaselect" ng-controller="graphFormulasCtrl">
+                    <div id="formulaselect" >
                         <input name="urlg" ng-model="urlg" />
                         <select  name="ngvalueselect" ng-model="options.model" ng-change="changeDias()">
                             <option ng-repeat="option in options.opciones" ng-value="option.value">{{option.text}}</option>
@@ -90,10 +42,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2"><img src="images/formula-icon.png" alt=""></div>
         </div>
     </div>
-        <div id="grafico" ng-controller="graphCtrl">
+    <ul class="nav nav-tabs">
+                <li ng-repeat="(key,value) in dias" class="{{value.clas}}"><a href="#{{value.nombre}}" ng-click="tabactive(key)">{{value.nombre}}</a></li>
+            </ul>
+        <div id="grafico">
             <div id="myChart" style="height:400p;width:1900px"></div>
 
         </div>
