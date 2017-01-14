@@ -1,0 +1,30 @@
+@charset "UTF-8";
+/* line 6, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
+body {
+  background: #4B72A6;
+}
+
+/* line 9, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
+h1 {
+  color: #CECDCD;
+  font-family: serif;
+  margin-top: 50%;
+  margin-left: 25%;
+}
+
+/* line 14, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
+h2 {
+  color: #CECDCD;
+}
+
+/* line 17, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
+img {
+  margin-top: 25%;
+}
+
+/* line 20, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
+#moiratrigger {
+  border-bottom: 4px solid #294973;
+}
+
+/*# sourceMappingURL=../css/style.map */

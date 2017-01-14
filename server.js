@@ -25,3 +25,4 @@ app.get('/getdataGraph',function (req,res) {
         res.json(data)
     });
 })
+
