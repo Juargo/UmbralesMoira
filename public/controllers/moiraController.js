@@ -4,7 +4,7 @@ angular.module("graphApp")
                 url:"http://localhost:3000/getmoiratriggers",
                 type: "GET",
                 success: function(data){
-                    $("#moiratriggers").append($compile(data)($scope));
+                    $("#moiratriggerselect").append($compile(data)($scope));
                 }
             });
         })

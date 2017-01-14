@@ -3,6 +3,8 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
@@ -11,62 +13,44 @@
     </script>
 <script src="controllers/moiraController.js"></script>
 <script src="controllers/graphFomulasController.js"></script>
-
-    <style>
-    :root {
-  --color-text: #04396C;
-}
-        body{
-            background: lightgray
-        }
-        h1{
-            text-align: center;
-        }
-    </style>
 </head>
 
 <body>
     <div class="container-fluid">
-        <div class="row" id="head-moira" style="border-bottom: 4px solid;">
-            <div class="col-md-2">
-                <h1>
-                    <strong style="color: var(--color-text);-webkit-text-stroke: 1px var(--color-text);">1#</strong>
-                </h1>
+        <div class="row" id="moiratrigger">
+            <div class="col-md-1">
+                <h1><strong>1#</strong></h1>
             </div>
-            <div class="col-md-8">
-                <div class="row" style="margin-left: 5px;">
-                    <h4 style="color: var(--color-text);">Selecciona el <kbd>Trigger</kbd> moira para configurar sus umbrales diarios</h4>
+            <div class="col-md-9">
+                <div class="row">
+                    <h2>Selecciona el <kbd>Trigger</kbd> moira para configurar sus umbrales diarios</h2>
                 </div>
                 <div class="row">
-                    <div id="moiratriggers" ng-controller="moiraCtrl" style="margin-bottom: 8px;">
+                    <div id="moiratriggerselect" ng-controller="moiraCtrl">
                         {{selected}}
                     </div>
                 </div>
             </div>
-            <div class="col-md-2"><h1><img src="images/moira.png" alt=""></h1></div>
+            <div class="col-md-2"><img src="images/moira.png" alt=""></div>
         </div>
-        <div class="row"  style="border-bottom: 4px solid;">
-            <div class="col-md-2">
-                <h1>
-                    <strong style="color: var(--color-text);-webkit-text-stroke: 1px var(--color-text);">2#</strong>
-                </h1>
+        <div class="row" id="formulas">
+            <div class="col-md-1">
+                <h1><strong>2#</strong></h1>
             </div>
-            <div class="col-md-8">
-                <div class="row" style="margin-left: 5px;">
-                    <h4 style="color: var(--color-text);">Ingrese la <kbd>formula</kbd> y la semana a analizar</h4>
+            <div class="col-md-9">
+                <div class="row">
+                    <h2>Ingrese la <kbd>formula</kbd> y la semana a analizar</h2>
                 </div>
                 <div class="row">
-                    <div id="moiratriggers" ng-controller="graphFormulasCtrl" style="margin-bottom: 8px;">
+                    <div id="formulaselect" ng-controller="graphFormulasCtrl">
                         <input name="urlg" ng-model="urlg" />
-                <select  name="ngvalueselect" ng-model="options.model" ng-change="changeDias()">
-                    <option ng-repeat="option in options.opciones" ng-value="option.value">{{option.text}}</option>
-                </select>
+                        <select  name="ngvalueselect" ng-model="options.model" ng-change="changeDias()">
+                            <option ng-repeat="option in options.opciones" ng-value="option.value">{{option.text}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2"><h1><img src="images/formula-icon.png" alt="" style="
-    height: 19%;
-"></h1></div>
+            <div class="col-md-2"><img src="images/formula-icon.png" alt=""></div>
         </div>
     </div>
 </body>
