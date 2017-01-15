@@ -29,13 +29,10 @@ angular.module("graphApp")
                 }
                 $scope.dias[indi].clas ="active";
 
-                //plot1.destroy();
-                //$scope.getUrl($scope.dias[indi].fi,$scope.dias[indi].ff)
-                //console.log($scope.urlg);
-                //console.log($scope.dias[indi].fi);
-                //console.log($scope.dias[indi].ff);
-
-                //plot1.destroy();
+                if (typeof $scope.plot1 !== 'undefined') {
+                    $scope.plot1.destroy();
+                }
+                
                 $scope.getUrl($scope.urlg,$scope.dias[indi].fi,$scope.dias[indi].ff)
 
     }
@@ -69,7 +66,7 @@ angular.module("graphApp")
                     $.jqplot.config.enablePlugins = true;
                     data = [puntosn,pw1,pw2] ;
 
-                    plot1 = $.jqplot('myChart',data,{
+                    $scope.plot1 = $.jqplot('myChart',data,{
                         title: "Umbrales",
                         axes:{
                             xaxis:{
