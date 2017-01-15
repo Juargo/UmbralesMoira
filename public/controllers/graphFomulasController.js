@@ -68,6 +68,19 @@ angular.module("graphApp")
 
                     $scope.plot1 = $.jqplot('myChart',data,{
                         title: "Umbrales",
+                        series:[{},{
+                            //linePattern: 'dotted',
+                            linePattern: 'dashed',
+                            lineWidth: 1,
+                            showMarker: false,
+                            shadow: false,
+                            //pointLabels: { show:true } 
+                            markerOptions: { style:"circle" }
+                        },{
+                            linePattern: 'dotted',
+                            showMarker: false,
+                            shadow: false
+                        }],
                         axes:{
                             xaxis:{
                                 renderer: $.jqplot.DateAxisRenderer,
