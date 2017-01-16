@@ -33,11 +33,9 @@
                 <div class="row">
                     <div id="formulaselect" >
                         <input name="urlg" ng-model="urlg" />
-                        <select  name="ngvalueselect" ng-model="options.model" ng-change="changeDias()">
-                            <option ng-repeat="option in options.opciones" ng-value="option.value">{{option.text}}</option>
-                        </select>
                     </div>
                 </div>
+                Desde el {{lastLunes.getDate()}}/{{lastLunes.getMonth()+1}}/{{lastLunes.getFullYear()}} hasta el {{lastDomingo.getDate()}}/{{lastDomingo.getMonth()+1}}/{{lastDomingo.getFullYear()}}
             </div>
         </div>
     </div>
