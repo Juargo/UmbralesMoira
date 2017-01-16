@@ -20,6 +20,7 @@
     </script>
 
     <script src="controllers/graphFomulasController.js"></script>
+    <script src="controllers/graphController.js"></script>
   </head>
 <body ng-controller="graphFormulasCtrl">
    
@@ -35,13 +36,16 @@
                         <input name="urlg" ng-model="urlg" />
                     </div>
                 </div>
+                <input type="radio" ng-model="base" value="Default" ng-change='baseSelected()'> Default
                 Desde el {{lastLunes.getDate()}}/{{lastLunes.getMonth()+1}}/{{lastLunes.getFullYear()}} hasta el {{lastDomingo.getDate()}}/{{lastDomingo.getMonth()+1}}/{{lastDomingo.getFullYear()}}
+                <input type="radio" ng-model="base" value="Especial" ng-change='baseSelected()'> Especial
+                
             </div>
         </div>
     </div>
-    <ul class="nav nav-tabs">
-                <li ng-repeat="(key,value) in dias" class="{{value.clas}}"><a href="#{{value.nombre}}" ng-click="tabactive(key)">{{value.nombre}}</a></li>
-            </ul>
+    <ul class="nav nav-tabs" ng-controller="graphController">
+        <li ng-repeat="(key,value) in dias" class="{{value.clas}}"><a href="#{{value.nombre}}" ng-click="tabactive(key)">{{value.nombre}}</a></li>
+    </ul>
         <div id="grafico">
             <div id="myChart" style="height:400p;width:1900px"></div>
 

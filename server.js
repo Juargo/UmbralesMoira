@@ -12,19 +12,24 @@ app.get('/getdataGraph',function (req,res) {
     formula = formula.replace(/ /g, '%20').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/,/g, '%2C').replace(/\"/g, '%22');
 
     var fi = req.query.fi;
-    var ff = req.query.ff;
+    
     //var from = "00:00_20161205" ;
     //var until = "00:00_20161206";
 
-    if(fi<10){
-        fi = "0"+fi;
+    anno = fi.split("_")[0];
+    if(fi.split("_")[1]<10){
+        mes = "0"+fi.split("_")[1].toString();
+    }else{
+        mes = fi.split("_")[1]
     }
-    if(ff<10){
-        ff = "0"+ff;
+    if(fi.split("_")[2]<10){
+        dia = "0"+fi.split("_")[2].toString();
+    }else{
+        dia = fi.split("_")[2]
     }
 
-    var from = "00:00_201612" + fi ;
-    var until = "00:00_201612" + ff;
+    var from = "00:00_"+ anno + mes + dia ;
+    var until = "23:59_" + anno + mes + dia ;
     var tz = "America/Santiago";
     var format = "json";
 

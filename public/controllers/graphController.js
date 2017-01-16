@@ -1,25 +1,26 @@
-$scope.tabactive = function (indi) {  
-         for(i=0;i<$scope.dias.length;i++){
-                    $scope.dias[i].clas="";
-                }
-                $scope.dias[indi].clas ="active";
+angular.module("graphApp")
+.controller("graphController",function($scope){
+    $scope.tabactive = function (indi) {  
+        for(i=0;i<$scope.dias.length;i++){
+                $scope.dias[i].clas="";
+        }
+        $scope.dias[indi].clas ="active";
 
-                if (typeof $scope.plot1 !== 'undefined') {
-                    $scope.plot1.destroy();
-                }
+        if (typeof $scope.plot1 !== 'undefined') {
+            $scope.plot1.destroy();
+        }
                 
-                $scope.getUrl($scope.urlg,$scope.dias[indi].fi,$scope.dias[indi].ff)
-
+        $scope.getUrl($scope.urlg,$scope.dias[indi].fi)
     }
 
-    $scope.getUrl = function(urlg,fi,ff){
+    $scope.getUrl = function(urlg,fi){
             var puntosn=[];
                 var pw1=[];
                 var pw2=[];
                 //var urlg = "aliasByNode(summarize(gwpromo.compra.general.estado.Ok, \"10min\", \"sum\"), 4)"
                 //aliasByNode(summarize(gwpromo.compra.general.estado.Ok, "10min", "sum"), 4)
                 
-                $.get("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + fi + "&ff=" + ff,function( data ) {
+                $.get("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + fi,function( data ) {
                     data = JSON.parse(data);
                     puntos = data[0].datapoints;
                     cantidad = puntos.length;
@@ -76,3 +77,4 @@ $scope.tabactive = function (indi) {
                     })
                 })
                 }
+})
