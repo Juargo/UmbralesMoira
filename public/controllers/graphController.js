@@ -1,13 +1,14 @@
 angular.module("graphApp")
-.controller("graphController",function($scope){
+.controller("graphController",function($scope,plot){
     $scope.tabactive = function (indi) {  
         for(i=0;i<$scope.dias.length;i++){
                 $scope.dias[i].clas="";
         }
         $scope.dias[indi].clas ="active";
 
-        if (typeof $scope.plot1 !== 'undefined') {
-            $scope.plot1.destroy();
+        var plot1 = plot.getPlot()
+        if (typeof plot1 !== 'undefined') {
+            plot1.destroy();
         }
                 
         $scope.getUrl($scope.urlg,$scope.dias[indi].fi)
@@ -41,40 +42,8 @@ angular.module("graphApp")
                     }
                     $.jqplot.config.enablePlugins = true;
                     data = [puntosn,pw1,pw2] ;
-
-                    $scope.plot1 = $.jqplot('myChart',data,{
-                        title: "Umbrales",
-                        series:[{},{
-                            //linePattern: 'dotted',
-                            linePattern: 'dashed',
-                            lineWidth: 1,
-                            showMarker: false,
-                            shadow: false,
-                            //pointLabels: { show:true } 
-                            markerOptions: { style:"circle" }
-                        },{
-                            linePattern: 'dotted',
-                            showMarker: false,
-                            shadow: false
-                        }],
-                        axes:{
-                            xaxis:{
-                                renderer: $.jqplot.DateAxisRenderer,
-                                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
-                                tickOptions:{
-                                    formatString: "%H:%M",
-                                    angle:-45
-                                }
-                            }
-                        },
-                        highligther:{
-                            sizeAdjust:10,
-                            tooltipLocation:'n',
-                            tooltipAxes:'both',
-                            tooltipFormatString:'<b><i><span>%s , </span></i></b> %.2f',
-                            useAxesFormatters:false
-                        }
-                    })
+                    
+                    plot.setPlot(data);
                 })
                 }
 })

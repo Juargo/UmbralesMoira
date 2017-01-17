@@ -27,7 +27,21 @@ angular.module("graphApp")
 
 
         $scope.guardar = function () {
-           console.log(plot)
+           plot1 = plot.getPlot();
+           datapoint="";
+           for (var i=0; i<plot1.series[0].data.length;i++){
+               datapoint = datapoint + ",[" + plot1.series[0].data[i] + "]";
+           }
+           text = '{"tigger": "Test1",'+
+                  '"formulas": [' +
+                            '{'+
+                                '"nombre" : "Testformula",'+
+                                '"formula": ' + $scope.urlg.replace(/"/g,'\\"') +','+
+                                '"datapoint": [' + datapoint.substr(1) + ']'+
+                            '}' +
+                  ']}';
+
+            console.log(text);
           }
 
     })
