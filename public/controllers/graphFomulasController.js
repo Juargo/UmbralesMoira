@@ -1,5 +1,5 @@
 angular.module("graphApp")
-    .controller("graphFormulasCtrl", function ($scope) {
+    .controller("graphFormulasCtrl", function ($scope, plot) {
 
         var beforeOneWeek = new Date(new Date().getTime() - 60 * 60 * 24 * 7 * 1000)
         day = beforeOneWeek.getDay()
@@ -26,5 +26,8 @@ angular.module("graphApp")
          }
 
 
-         
+        $scope.guardar = function () {
+           console.log(plot)
+          }
+
     })
