@@ -1,6 +1,11 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.use(express.static('public'));
 
@@ -21,8 +26,7 @@ umbrales = mongoose.model('Umbral',{
      ]
 });
 
-app.get('/api/test1', function(req, res) {  
-    console.log("s");
+app.get('/api/getall', function(req, res) {  
     umbrales.find(function(err, rutas) {
         if(err) {
             res.send(err);
@@ -31,7 +35,7 @@ app.get('/api/test1', function(req, res) {
     });
 });
 
-app.post('/api/test2',function(req,res){
+app.post('/api/insert',function(req,res){
     var a = new umbrales({
         trigger:"dan2",
         formulas:[
@@ -50,9 +54,41 @@ app.post('/api/test2',function(req,res){
    a.save(function(err){
        if(err)
             res.send(err);
-            //res.json(req)
-            //res.send(req.body);
    })
 
    res.end();
 })
+
+app.get('/api/getid/:id', function (req,res) {   
+    umbrales.findById(req.params.id, function (err,data) {
+        if(err)
+            res.send(err);
+        
+        res.json(data);
+    })
+})
+
+app.put('/api/update/:id',function (req,res) {
+    umbrales.findById(req.params.id, function (err,data) {  
+        if(err)
+            res.send(err);
+        
+        data.trigger = req.query.trigger;
+
+        data.save(function (err) {  
+            if(err)
+                res.send(err)
+            
+            res.json(data);
+        })
+    })
+  })
+
+  app.delete('/api/delete/:id',function (req,res) {  
+      umbrales.findByIdAndRemove(req.params.id,function (err) {  
+          if(err)
+            res.send(err)
+        
+          res.json({message:'ok'})
+      })
+  })
