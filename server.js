@@ -26,7 +26,7 @@ umbrales = mongoose.model('Umbral',{
      ]
 });
 
-app.get('/api/getall', function(req, res) {  
+app.get('/getall', function(req, res) {  
     umbrales.find(function(err, rutas) {
         if(err) {
             res.send(err);
@@ -35,7 +35,7 @@ app.get('/api/getall', function(req, res) {
     });
 });
 
-app.post('/api/insert',function(req,res){
+app.post('/insert',function(req,res){
     var a = new umbrales({
         trigger:"dan2",
         formulas:[
@@ -59,7 +59,7 @@ app.post('/api/insert',function(req,res){
    res.end();
 })
 
-app.get('/api/getid/:id', function (req,res) {   
+app.get('/getid/:id', function (req,res) {   
     umbrales.findById(req.params.id, function (err,data) {
         if(err)
             res.send(err);
@@ -68,7 +68,7 @@ app.get('/api/getid/:id', function (req,res) {
     })
 })
 
-app.put('/api/update/:id',function (req,res) {
+app.put('/update/:id',function (req,res) {
     umbrales.findById(req.params.id, function (err,data) {  
         if(err)
             res.send(err);
@@ -84,7 +84,7 @@ app.put('/api/update/:id',function (req,res) {
     })
   })
 
-  app.delete('/api/delete/:id',function (req,res) {  
+  app.delete('/delete/:id',function (req,res) {  
       umbrales.findByIdAndRemove(req.params.id,function (err) {  
           if(err)
             res.send(err)
@@ -92,3 +92,40 @@ app.put('/api/update/:id',function (req,res) {
           res.json({message:'ok'})
       })
   })
+});
+
+app.get('/getdataGraph',function (req,res) {  
+    var formula = req.query.formula;
+    formula = formula.replace(/ /g, '%20').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/,/g, '%2C').replace(/\"/g, '%22');
+
+    var fi = req.query.fi;
+    
+    //var from = "00:00_20161205" ;
+    //var until = "00:00_20161206";
+
+    anno = fi.split("_")[0];
+    if(fi.split("_")[1]<10){
+        mes = "0"+fi.split("_")[1].toString();
+    }else{
+        mes = fi.split("_")[1]
+    }
+    if(fi.split("_")[2]<10){
+        dia = "0"+fi.split("_")[2].toString();
+    }else{
+        dia = fi.split("_")[2]
+    }
+
+    var from = "00:00_"+ anno + mes + dia ;
+    var until = "23:59_" + anno + mes + dia ;
+    var tz = "America/Santiago";
+    var format = "json";
+
+    var exec = require('child_process').execFile('public/bash.sh',
+        [
+            formula, from, until, tz, format
+        ]);
+
+    exec.stdout.on('data', function (data) {
+        res.json(data)
+    });
+})
