@@ -32,7 +32,7 @@ angular.module("graphApp")
            for (var i=0; i<plot1.series[0].data.length;i++){
                datapoint = datapoint + ",[" + plot1.series[0].data[i] + "]";
            }
-           text = '{"trigger": "Test1",'+
+           text = '{"trigger": "test espacio",'+
                   '"formulas":'+
                     '[{'+
                         '"nombre" : "Testformula",'+

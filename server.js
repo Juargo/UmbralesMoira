@@ -57,8 +57,13 @@ app.get('/getid/:id', function (req, res) {
     })
 })
 
-app.get('/getbyname/:name',function (req,res) {  
-    umbrales.find('{}')
+app.get('/getbyname/:nombre',function (req,res) {  
+    //umbrales.find('{trigger: : '+ req.query.nombre +'}', function (err, data) {
+    umbrales.find({ 'trigger': req.params.nombre}, function (err, data) {
+        if (err)
+            res.send(err);
+        res.json(data);    
+    })
  })
 
 app.put('/update/:id', function (req, res) {
