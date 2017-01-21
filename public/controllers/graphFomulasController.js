@@ -1,5 +1,5 @@
 angular.module("graphApp")
-    .controller("graphFormulasCtrl", function ($scope, plot) {
+    .controller("graphFormulasCtrl", function ($http,$scope, plot) {
 
         var beforeOneWeek = new Date(new Date().getTime() - 60 * 60 * 24 * 7 * 1000)
         day = beforeOneWeek.getDay()
@@ -36,12 +36,20 @@ angular.module("graphApp")
                   '"formulas": [' +
                             '{'+
                                 '"nombre" : "Testformula",'+
-                                '"formula": ' + $scope.urlg.replace(/"/g,'\\"') +','+
+                                '"formula": "' + $scope.urlg.replace(/"/g,'\\"') +'",'+
                                 '"datapoint": [' + datapoint.substr(1) + ']'+
                             '}' +
                   ']}';
 
-            console.log(text);
+            //console.log(JSON.parse(text));
+
+          $http.post("http://localhost:3000/insert",JSON.parse(text))
+            // $http({
+            //     url: 'http://localhost:3000/insert', // IP address replaced with ##'s
+            //     method: 'POST',
+            //     data: text,
+            //     headers: {'Content-Type': 'application/json'}
+            // });
           }
 
     })
