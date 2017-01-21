@@ -32,24 +32,19 @@ angular.module("graphApp")
            for (var i=0; i<plot1.series[0].data.length;i++){
                datapoint = datapoint + ",[" + plot1.series[0].data[i] + "]";
            }
-           text = '{"tigger": "Test1",'+
-                  '"formulas": [' +
-                            '{'+
-                                '"nombre" : "Testformula",'+
-                                '"formula": "' + $scope.urlg.replace(/"/g,'\\"') +'",'+
-                                '"datapoint": [' + datapoint.substr(1) + ']'+
-                            '}' +
-                  ']}';
-
-            //console.log(JSON.parse(text));
-
+           text = '{"trigger": "Test1",'+
+                  '"formulas":'+
+                    '[{'+
+                        '"nombre" : "Testformula",'+
+                        '"formula": "' + $scope.urlg.replace(/"/g,'\\"') +'",'+
+                        '"datapoint":' +
+                            '[{'+
+                                '"nombre" : "lunes",'+
+                                '"puntos" :[' + datapoint.substr(1) + ']' +
+                            '}]'+
+                    '}]}';
+                
           $http.post("http://localhost:3000/insert",JSON.parse(text))
-            // $http({
-            //     url: 'http://localhost:3000/insert', // IP address replaced with ##'s
-            //     method: 'POST',
-            //     data: text,
-            //     headers: {'Content-Type': 'application/json'}
-            // });
           }
 
     })
