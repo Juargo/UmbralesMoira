@@ -41,12 +41,10 @@ app.get('/getall', function (req, res) {
 
 app.post('/insert', function (req, res) {
     var a = new umbrales(req.body)
-    a.save(function (err) {
-        if (err)
-            res.send(err);
-    })
-
+    a.save().then(function(data) {
+        res.json({status:500, data: data.id });
     res.end();
+    })
 })
 
 app.get('/getid/:id', function (req, res) {
