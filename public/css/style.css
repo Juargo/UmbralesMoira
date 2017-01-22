@@ -1,29 +1,37 @@
 @charset "UTF-8";
-/* line 6, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
+/* line 7, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
 body {
   background: #4B72A6;
 }
 
-/* line 9, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
+/* line 10, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
 h1 {
   color: #CECDCD;
   font-family: serif;
-  margin-top: 50%;
+  margin-top: 19%;
   margin-left: 25%;
-}
-
-/* line 14, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
-h2 {
-  color: #CECDCD;
+  font-size: 32px;
 }
 
 /* line 17, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
-img {
-  margin-top: 25%;
+h2 {
+  color: #CECDCD;
+  font-size: 16px;
+  margin-top: 6px;
 }
 
-/* line 20, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
+/* line 22, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
+img {
+  margin-top: 5%;
+}
+
+/* line 25, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
 #moiratrigger {
+  border-bottom: 4px solid #294973;
+}
+
+/* line 28, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
+#formulas {
   border-bottom: 4px solid #294973;
 }
 

@@ -5,8 +5,8 @@
 		"../sass/style.sass"
 	],
 	"sourcesContent": [
-		"$back-color: #4B72A6;\n$letra: #CECDCD;\n$font-family: serif;\n$margin: #294973;\n\nbody {\n  background : $back-color; }\n\nh1 {\n  color : $letra;\n  font-family: $font-family;\n  margin-top: 50%;\n  margin-left: 25%; }\nh2 {\n  color: $letra; }\n\nimg {\n  margin-top: 25%; }\n\n#moiratrigger {\n  border-bottom: 4px solid $margin; }\n"
+		"$back-color: #4B72A6;\n$letra: #CECDCD;\n$font-family: serif;\n$margin: #294973;\n$size_leter: 16;\n\nbody {\n  background : $back-color; }\n\nh1 {\n  color : $letra;\n  font-family: $font-family;\n  margin-top: 19%;\n  margin-left: 25%;\n  font-size: $size_leter + 16px; }\n\nh2 {\n  color: $letra;\n  font-size: $size_leter+px;\n  margin-top: 6px; }\n\nimg {\n  margin-top: 5%; }\n\n#moiratrigger {\n  border-bottom: 4px solid $margin; }\n\n#formulas {\n  border-bottom: 4px solid $margin; }\n"
 	],
-	"mappings": ";;AAKA,AAAA,IAAI,CAAC;EACH,UAAU,EANC,OAAO;CAMS;;;AAE7B,AAAA,EAAE,CAAC;EACD,KAAK,EARC,OAAO;EASb,WAAW,EARC,KAAK;EASjB,UAAU,EAAE,GAAI;EAChB,WAAW,EAAE,GAAI;CAAG;;;AACtB,AAAA,EAAE,CAAC;EACD,KAAK,EAbC,OAAO;CAaG;;;AAElB,AAAA,GAAG,CAAC;EACF,UAAU,EAAE,GAAI;CAAG;;;AAErB,AAAA,aAAa,CAAC;EACZ,aAAa,EAAE,GAAG,CAAC,KAAK,CAjBjB,OAAO;CAiBqB",
+	"mappings": ";;AAMA,AAAA,IAAI,CAAC;EACH,UAAU,EAPC,OAAO;CAOS;;;AAE7B,AAAA,EAAE,CAAC;EACD,KAAK,EATC,OAAO;EAUb,WAAW,EATC,KAAK;EAUjB,UAAU,EAAE,GAAI;EAChB,WAAW,EAAE,GAAI;EACjB,SAAS,EAAE,IAAW;CAAU;;;AAElC,AAAA,EAAE,CAAC;EACD,KAAK,EAhBC,OAAO;EAiBb,SAAS,EAdE,IAAE;EAeb,UAAU,EAAE,GAAI;CAAG;;;AAErB,AAAA,GAAG,CAAC;EACF,UAAU,EAAE,EAAG;CAAG;;;AAEpB,AAAA,aAAa,CAAC;EACZ,aAAa,EAAE,GAAG,CAAC,KAAK,CAtBjB,OAAO;CAsBqB;;;AAErC,AAAA,SAAS,CAAC;EACR,aAAa,EAAE,GAAG,CAAC,KAAK,CAzBjB,OAAO;CAyBqB",
 	"names": []
 }

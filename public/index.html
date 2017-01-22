@@ -30,6 +30,7 @@
                         {{selected}}
                     </div>
                 </div>
+                <div class="alert alert-warning" role="alert">Estre trigger no posee umbrales creados </div>
             </div>
             <div class="col-md-2"><img src="images/moira.png" alt=""></div>
         </div>
@@ -38,19 +39,18 @@
                 <h1><strong>2#</strong></h1>
             </div>
             <div class="col-md-9">
+
                 <div class="row">
-                    <h2>Ingrese la <kbd>formula</kbd> y la semana a analizar</h2>
+                    <h2>Escoja o ingrese la <kbd>fórmula</kbd> que determinará como se mostrada la data</h2>
                 </div>
                 <div class="row">
-                    <div id="formulaselect" ng-controller="graphFormulasCtrl">
+                    
+                    <!--<div id="formulaselect" ng-controller="graphFormulasCtrl">
                         <input name="urlg" ng-model="urlg" />
-                        <select  name="ngvalueselect" ng-model="options.model" ng-change="changeDias()">
-                            <option ng-repeat="option in options.opciones" ng-value="option.value">{{option.text}}</option>
-                        </select>
-                    </div>
+                    </div>-->
                 </div>
             </div>
-            <div class="col-md-2"><img src="images/formula-icon.png" alt=""></div>
+            <div class="col-md-2"><img src="images/formula-icon.png" alt="" style="width: 80px;"></div>
         </div>
     </div>
 </body>
