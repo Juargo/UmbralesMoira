@@ -45,15 +45,17 @@
         </div>
     </div>
     <ul class="nav nav-tabs" ng-controller="graphController">
-        <li ng-repeat="(key,value) in dias" class="{{value.clas}}"><a href="#{{value.nombre}}" ng-click="tabactive(key)">{{value.nombre}}</a></li>
+        <li ng-repeat="(key,value) in dias" class="{{value.clas}}">
+            <a href="#{{value.nombre}}" ng-click="tabactive(key)">{{value.nombre}} <button type="button" class="btn btn-success btn-xs" ng-click="save()"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></button></a>
+            
+        </li>
     </ul>
         <div id="grafico">
             <div id="myChart" style="height:400p;width:1900px"></div>
-
         </div>
-        <div id="boton">
+        <!--<div id="boton">
             <button type="button" ng-click="guardar()">guardar</button>
-        </div>
+        </div>-->
     </div>
 </body>
 
