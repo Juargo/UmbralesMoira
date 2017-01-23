@@ -13,6 +13,8 @@ angular.module("graphApp")
                 options.ndia = options.ndia || 0;
                 options.dataL = options.dataL || [];
                 options.dataU = options.dataU || [];
+                options.trigger = options.trigger || {};
+                options.nformula = options.nformula || '';
 
                 datapointL = "";
                 for (var i = 0; i < options.dataL.length; i++) {
@@ -59,7 +61,22 @@ angular.module("graphApp")
                         '}' +
                         ']' +
                         '}'
-                } else if (option.type == 'used') {
+                } else if (options.type == 'used') {
+                    trigger = options.trigger;
+
+                    //console.log(trigger.formulas)
+                    for(i=0;i<trigger.formulas.length;i++){
+                        if(trigger.formulas[i].nombre == options.nformula){
+                            findice=i;
+                        }
+                    }
+
+                    puntosn = [{ serie: "low", data: [ datapointL ]},{serie: "up", data: [datapointU ]}];
+
+                    //console.log(puntosn);
+                    //console.log(trigger.formulas[findice].datapoint[options.ndia].puntos);
+                    trigger.formulas[findice].datapoint[options.ndia].puntos = puntosn;
+                    console.log(trigger.formulas[findice].datapoint[options.ndia].puntos);
 
                 } else {
                     return "error type"

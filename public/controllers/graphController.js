@@ -29,7 +29,7 @@ angular.module("graphApp")
             plot.resetid()
         }
 
-        $scope.guardar = function (ndia) {
+        $scope.guardar = function (ndia,nformula) {
 
 
 
@@ -78,18 +78,30 @@ angular.module("graphApp")
                     dataL: plot1.series[1].data,
                     dataU: plot1.series[2].data
                 });
-                console.log(JSON.parse(jsontrigger.gettrigger()))
 
-                plot.setid("123");
-                // $http.post("http://localhost:3000/insert", JSON.parse(text)).then(
-                //     function (response) {
-                //         var data = response.data;
-                //         plot.setid(data);
-                //     }, function (error) {
-                //         var data = error.data;
-                //     });
+                //console.log(JSON.parse(jsontrigger.gettrigger()))
+                $http.post("http://localhost:3000/insert", JSON.parse(jsontrigger.gettrigger())).then(
+                    function (response) {
+                        var data = response.data;
+                        plot.setid(data);
+                    }, function (error) {
+                        var data = error.data;
+                    });
             } else {
-                console.log(idg);
+                console.log(idg.data);
+                $http.get("http://localhost:3000/getid/" + idg.data).then(
+                    function (resp) {
+                        jsontrigger.settrigger({
+                            type: 'used',
+                            dias: $scope.dias,
+                            ndia: ndia,
+                            dataL: plot1.series[1].data,
+                            dataU: plot1.series[2].data,
+                            trigger: resp.data,
+                            nformula: nformula
+                        });
+                    }
+                )
             }
         }
 
