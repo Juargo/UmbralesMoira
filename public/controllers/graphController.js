@@ -1,5 +1,5 @@
 angular.module("graphApp")
-    .controller("graphController", function ($scope, $http, plot,jsontrigger) {
+    .controller("graphController", function ($scope, $http, plot, jsontrigger) {
         var beforeOneWeek = new Date(new Date().getTime() - 60 * 60 * 24 * 7 * 1000)
         day = beforeOneWeek.getDay()
         diffToMonday = beforeOneWeek.getDate() - day + (day === 0 ? -6 : 1)
@@ -29,15 +29,12 @@ angular.module("graphApp")
             plot.resetid()
         }
 
-        $scope.guardar = function () {
+        $scope.guardar = function (ndia) {
 
-            jsontrigger.settrigger({
-                type:'new',
-                urlg: $scope.urlg,
-                dias: $scope.dias
-            });
 
-            console.log(JSON.parse(jsontrigger.gettrigger()))
+
+            //console.log(JSON.parse(jsontrigger.gettrigger()))
+
             // dias = '';
             // for (var i = 0; i < 7; i++) {
             //     dias = dias + ',{' +
@@ -69,21 +66,31 @@ angular.module("graphApp")
             //     ']' +
             //     '}';
 
-            // idg = plot.getid();
+            idg = plot.getid();
 
             //console.log(JSON.parse(text));
-            // if (typeof idg == 'undefined') {
-            //     $http.post("http://localhost:3000/insert", JSON.parse(text)).then(
-            //         function (response) {
-            //             var data = response.data;
-            //             plot.setid(data);
-            //         }, function (error) {
-            //             var data = error.data;
-            //         });
-            // } else {
+            if (typeof idg == 'undefined') {
+                jsontrigger.settrigger({
+                    type: 'new',
+                    urlg: $scope.urlg,
+                    dias: $scope.dias,
+                    ndia: ndia,
+                    dataL: plot1.series[1].data,
+                    dataU: plot1.series[2].data
+                });
+                console.log(JSON.parse(jsontrigger.gettrigger()))
 
-            //     console.log(idg);
-            // }
+                plot.setid("123");
+                // $http.post("http://localhost:3000/insert", JSON.parse(text)).then(
+                //     function (response) {
+                //         var data = response.data;
+                //         plot.setid(data);
+                //     }, function (error) {
+                //         var data = error.data;
+                //     });
+            } else {
+                console.log(idg);
+            }
         }
 
         $scope.getData = function (indice) {
