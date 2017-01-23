@@ -1,5 +1,5 @@
 angular.module("graphApp")
-    .controller("graphController", function ($scope, $http, plot) {
+    .controller("graphController", function ($scope, $http, plot,jsontrigger) {
         var beforeOneWeek = new Date(new Date().getTime() - 60 * 60 * 24 * 7 * 1000)
         day = beforeOneWeek.getDay()
         diffToMonday = beforeOneWeek.getDate() - day + (day === 0 ? -6 : 1)
@@ -25,38 +25,75 @@ angular.module("graphApp")
             plot1.destroy()
         }
 
-         $scope.resetid = function () {
+        $scope.resetid = function () {
             plot.resetid()
         }
 
         $scope.guardar = function () {
-            text = '{"trigger": "test espacio",' +
-                '"formulas":' +
-                '[]}';
 
-            idg = plot.getid();
-            if (typeof idg == 'undefined') {
-                $http.post("http://localhost:3000/insert", JSON.parse(text)).then(
-                    function (response) {
-                        var data = response.data;
-                        plot.setid(data);
-                    }, function (error) {
-                        var data = error.data;
-                    });
-            }else{
-                console.log("dd")
-                console.log(idg);
-            }
+            jsontrigger.settrigger({
+                type:'new',
+                urlg: $scope.urlg,
+                dias: $scope.dias
+            });
+
+            console.log(JSON.parse(jsontrigger.gettrigger()))
+            // dias = '';
+            // for (var i = 0; i < 7; i++) {
+            //     dias = dias + ',{' +
+            //         '"nombre" : "' + $scope.dias[i].nombre + '",' +
+            //         '"puntos" :[]' +
+            //         '}'
+            // }
+
+            // dias = dias.substr(1);
+
+            // formulas = '';
+            // for (var i = 0; i < 3; i++) {
+            //     formulas = formulas + ',{' +
+            //         '"nombre" : "TestformulaN' + i + '",' +
+            //         '"formula": "' + $scope.urlg.replace(/"/g, '\\"') + '",' +
+            //         '"datapoint":' +
+            //         '[' +
+            //         dias +
+            //         ']' +
+            //         '}';
+            // }
+
+            // formulas = formulas.substr(1);
+
+            // text = '{"trigger": "test espacio",' +
+            //     '"formulas":' +
+            //     '[' +
+            //     formulas +
+            //     ']' +
+            //     '}';
+
+            // idg = plot.getid();
+
+            //console.log(JSON.parse(text));
+            // if (typeof idg == 'undefined') {
+            //     $http.post("http://localhost:3000/insert", JSON.parse(text)).then(
+            //         function (response) {
+            //             var data = response.data;
+            //             plot.setid(data);
+            //         }, function (error) {
+            //             var data = error.data;
+            //         });
+            // } else {
+
+            //     console.log(idg);
+            // }
         }
 
         $scope.getData = function (indice) {
             var puntosn = [];
             var pw1 = [];
             var pw2 = [];
-            var urlg = "aliasByNode(summarize(gwpromo.compra.general.estado.Ok, \"10min\", \"sum\"), 4)";
+            $scope.urlg = "aliasByNode(summarize(gwpromo.compra.general.estado.Ok, \"10min\", \"sum\"), 4)";
 
 
-            $.get("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + $scope.dias[indice].fi, function (data) {
+            $.get("http://localhost:3000/getdataGraph?formula=" + $scope.urlg + "&fi=" + $scope.dias[indice].fi, function (data) {
                 data = JSON.parse(data);
                 puntos = data[0].datapoints;
                 cantidad = puntos.length;
