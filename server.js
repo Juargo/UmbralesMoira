@@ -7,8 +7,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(bodyParser.urlencoded());
-
 app.use(bodyParser.json());
 
 app.use(express.static('public'));
@@ -41,9 +39,9 @@ app.get('/getall', function (req, res) {
 
 app.post('/insert', function (req, res) {
     var a = new umbrales(req.body)
-    a.save().then(function(data) {
-        res.json({status:500, data: data.id });
-    res.end();
+    a.save().then(function (data) {
+        res.json({ status: 500, data: data.id });
+        res.end();
     })
 })
 
@@ -55,14 +53,13 @@ app.get('/getid/:id', function (req, res) {
     })
 })
 
-app.get('/getbyname/:nombre',function (req,res) {  
-    //umbrales.find('{trigger: : '+ req.query.nombre +'}', function (err, data) {
-    umbrales.find({ 'trigger': req.params.nombre}, function (err, data) {
+app.get('/getbyname/:nombre', function (req, res) {
+    umbrales.find({ 'trigger': req.params.nombre }, function (err, data) {
         if (err)
             res.send(err);
-        res.json(data);    
+        res.json(data);
     })
- })
+})
 
 app.put('/update/:id', function (req, res) {
     umbrales.findById(req.params.id, function (err, data) {
@@ -86,6 +83,16 @@ app.delete('/delete/:id', function (req, res) {
             res.send(err)
 
         res.json({ message: 'ok' })
+    })
+})
+
+app.delete('/deleteall', function (req, res) {
+    umbrales.remove({}, function (err) {
+        if (err) {
+            console.log(err)
+        } else {
+            res.end('success');
+        }
     })
 })
 

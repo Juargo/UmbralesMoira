@@ -1,5 +1,6 @@
 <html ng-app="graphApp">
-  <head>
+
+<head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
@@ -16,45 +17,18 @@
     <link rel="stylesheet" type="text/css" href="/src/jquery.jqplot.css" />
 
     <script>
-        angular.module("graphApp",[])
+        angular.module("graphApp", [])
     </script>
 
-    <script src="controllers/graphFomulasController.js"></script>
-    <script src="controllers/graphController.js"></script>
-    <script src="factory/plotFactory.js"></script>
-  </head>
-<body ng-controller="graphFormulasCtrl">
-   
-    <div id="body" >
-      <div class="container-fluid">
-        <div class="row" id="formulas">
-            <div class="col-md-9">
-                <div class="row">
-                    <h2>Ingrese la <kbd>formula</kbd> y la semana a analizar</h2>
-                </div>
-                <div class="row">
-                    <div id="formulaselect" >
-                        <input name="urlg" ng-model="urlg" />
-                    </div>
-                </div>
-                <input type="radio" ng-model="base" value="Default" ng-change='baseSelected()'> Default
-                Desde el {{lastLunes.getDate()}}/{{lastLunes.getMonth()+1}}/{{lastLunes.getFullYear()}} hasta el {{lastDomingo.getDate()}}/{{lastDomingo.getMonth()+1}}/{{lastDomingo.getFullYear()}}
-                <input type="radio" ng-model="base" value="Especial" ng-change='baseSelected()'> Especial
-                
-            </div>
-        </div>
-    </div>
-    <ul class="nav nav-tabs" ng-controller="graphController">
-        <li ng-repeat="(key,value) in dias" class="{{value.clas}}"><a href="#{{value.nombre}}" ng-click="tabactive(key)">{{value.nombre}}</a></li>
-    </ul>
-        <div id="grafico">
-            <div id="myChart" style="height:400p;width:1900px"></div>
+<script src="controllers/graphFomulasController.js"></script>
+<script src="controllers/graphController.js"></script>
+<script src="factory/plotFactory.js"></script>
+</head>
 
-        </div>
-        <div id="boton">
-            <button type="button" ng-click="guardar()">guardar</button>
-        </div>
-    </div>
+<body>
+    <div id="grafico" ng-controller="graphController">
+        <div id="myChart" style="height:400p;width:1900px"></div>
+</div>
 </body>
 
 </html>
