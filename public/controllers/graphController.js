@@ -30,45 +30,8 @@ angular.module("graphApp")
         }
 
         $scope.guardar = function (ndia,nformula) {
-
-
-
-            //console.log(JSON.parse(jsontrigger.gettrigger()))
-
-            // dias = '';
-            // for (var i = 0; i < 7; i++) {
-            //     dias = dias + ',{' +
-            //         '"nombre" : "' + $scope.dias[i].nombre + '",' +
-            //         '"puntos" :[]' +
-            //         '}'
-            // }
-
-            // dias = dias.substr(1);
-
-            // formulas = '';
-            // for (var i = 0; i < 3; i++) {
-            //     formulas = formulas + ',{' +
-            //         '"nombre" : "TestformulaN' + i + '",' +
-            //         '"formula": "' + $scope.urlg.replace(/"/g, '\\"') + '",' +
-            //         '"datapoint":' +
-            //         '[' +
-            //         dias +
-            //         ']' +
-            //         '}';
-            // }
-
-            // formulas = formulas.substr(1);
-
-            // text = '{"trigger": "test espacio",' +
-            //     '"formulas":' +
-            //     '[' +
-            //     formulas +
-            //     ']' +
-            //     '}';
-
             idg = plot.getid();
 
-            //console.log(JSON.parse(text));
             if (typeof idg == 'undefined') {
                 jsontrigger.settrigger({
                     type: 'new',
@@ -80,15 +43,17 @@ angular.module("graphApp")
                 });
 
                 //console.log(JSON.parse(jsontrigger.gettrigger()))
-                $http.post("http://localhost:3000/insert", JSON.parse(jsontrigger.gettrigger())).then(
+                $http.post("http://localhost:3000/insert", jsontrigger.gettrigger()).then(
                     function (response) {
                         var data = response.data;
                         plot.setid(data);
                     }, function (error) {
                         var data = error.data;
                     });
+
+                //console.log(jsontrigger.gettrigger());
             } else {
-                console.log(idg.data);
+                //console.log(plot.getid());
                 $http.get("http://localhost:3000/getid/" + idg.data).then(
                     function (resp) {
                         jsontrigger.settrigger({
@@ -103,7 +68,12 @@ angular.module("graphApp")
                     }
                 )
             }
+            //console.log(jsontrigger.gettrigger());
         }
+
+        $scope.gettriggerconsole=function () {
+            console.log(jsontrigger.gettrigger());
+          }
 
         $scope.getData = function (indice) {
             var puntosn = [];
