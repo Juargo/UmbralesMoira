@@ -12,44 +12,30 @@
         angular.module("graphApp", []);
     </script>
 <script src="controllers/moiraController.js"></script>
+<script src="directives/SecPartDirective.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" ng-controller="moiraCtrl">
         <div class="row" id="moiratrigger">
             <div class="col-md-1">
                 <h1><strong>1#</strong></h1>
             </div>
-            <div class="col-md-9" ng-controller="moiraCtrl">
+            <div class="col-md-9" >
                 <div class="row">
                     <h2>Selecciona el <kbd>Trigger</kbd> moira para configurar sus umbrales diarios</h2>
                 </div>
                 <div class="row">
-                    <div id="moiratriggerselect" >
+                    <div id="moiratriggerselect">
                         <!--{{selected}}-->
                     </div>
                 </div>
-                <div class="alert alert-warning" role="alert" ng-hide="triggerguradado">Trigger no posee umbrales creados </div>
+                <div class="alert alert-warning" role="alert" ng-hide="triggerguradado"><strong> **Trigger no posee umbrales creados </strong></div>
             </div>
             <div class="col-md-2"><img src="images/moira.png" alt=""></div>
         </div>
-        <div class="row" id="formulas">
-            <div class="col-md-1">
-                <h1><strong>2#</strong></h1>
-            </div>
-            <div class="col-md-9">
-
-                <div class="row">
-                    <h2>Escoja o ingrese la <kbd>fórmula</kbd> que determinará como se mostrada la data</h2>
-                </div>
-                <div class="row">
-                    
-                    <!--<div id="formulaselect" ng-controller="graphFormulasCtrl">
-                        <input name="urlg" ng-model="urlg" />
-                    </div>-->
-                </div>
-            </div>
-            <div class="col-md-2"><img src="images/formula-icon.png" alt="" style="width: 80px;"></div>
+        <div class="row" id="formulas" >
+            <div donthave-umbral ng-hide="triggerguradado"></div>
         </div>
     </div>
 </body>

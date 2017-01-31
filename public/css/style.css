@@ -31,6 +31,17 @@ img {
 }
 
 /* line 28, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
+#moiratriggerselect {
+  margin-bottom: 10px;
+}
+
+/* line 31, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
+.alert-warning {
+  padding: 5px;
+  margin-bottom: 7px;
+}
+
+/* line 35, /home/jorge/Desktop/packumbrales/Diseño/public/sass/style.sass */
 #formulas {
   border-bottom: 4px solid #294973;
 }
