@@ -13,6 +13,7 @@
     </script>
 <script src="controllers/moiraController.js"></script>
 <script src="directives/SecPartDirective.js"></script>
+<script src="directives/thiPartDirective.js"></script>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
             <div class="col-md-1">
                 <h1><strong>1#</strong></h1>
             </div>
-            <div class="col-md-9" >
+            <div class="col-md-9">
                 <div class="row">
                     <h2>Selecciona el <kbd>Trigger</kbd> moira para configurar sus umbrales diarios</h2>
                 </div>
@@ -34,8 +35,11 @@
             </div>
             <div class="col-md-2"><img src="images/moira.png" alt=""></div>
         </div>
-        <div class="row" id="formulas" >
+        <div class="row" id="formulas">
             <div donthave-umbral ng-hide="triggerguradado"></div>
+        </div>
+        <div class="row" id="grafico" ng-show="grafica">
+            <div check-secondpart></div>
         </div>
     </div>
 </body>

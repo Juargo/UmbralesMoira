@@ -1,6 +1,7 @@
 angular.module("graphApp")
     .controller("moiraCtrl", function ($scope, $compile, $http) {
         $scope.triggerguradado = true;
+        $scope.grafica = false;
         $.ajax({
             url: "http://localhost:3000/getmoiratriggers",
             type: "GET",
@@ -46,4 +47,8 @@ angular.module("graphApp")
                 { fi: $scope.lastDomingo.getFullYear().toString() + "_" + ($scope.lastDomingo.getMonth() + 1).toString() + "_" + $scope.lastDomingo.getDate().toString(), class: "", nombre: "Domingo" },
             ]
         }
+
+        $scope.graficar = function () { 
+            $scope.grafica = true;
+         }
     })
