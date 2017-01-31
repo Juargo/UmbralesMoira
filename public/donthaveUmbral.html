@@ -1,16 +1,18 @@
 <div class="col-md-1">
-                <h1><strong>2#</strong></h1>
-            </div>
-            <div class="col-md-9" >
-                <div class="row">
-                    <h2>Escoja o ingrese la <kbd>fórmula</kbd> que determinará como se mostrada la data</h2>
-                </div>
-                <div class="row">
-
-                    <!--<div id="formulaselect" ng-controller="graphFormulasCtrl">
+    <h1><strong>2#</strong></h1>
+</div>
+<div class="col-md-9">
+    <div class="row">
+        <h2>Escoja rango de fecha que tendrá como base</h2>
+    </div>
+    <div class="row">
+        <input type="radio" ng-model="base" value="Default"> Default (Desde el {{lastLunes.getDate()}}/{{lastLunes.getMonth()+1}}/{{lastLunes.getFullYear()}}
+        hasta el {{lastDomingo.getDate()}}/{{lastDomingo.getMonth()+1}}/{{lastDomingo.getFullYear()}})
+        <input type="radio" ng-model="base" value="Especial"> Especial
+        <!--<div id="formulaselect" ng-controller="graphFormulasCtrl">
                         <input name="urlg" ng-model="urlg" />
                     </div>-->
-                </div>
-            </div>
-            <div class="col-md-2">
-                <img src="images/formula-icon.png" alt="" style="width: 80px;"></div>
+    </div>
+</div>
+<div class="col-md-2">
+    <img src="images/formula-icon.png" alt="" style="width: 80px;"></div>
