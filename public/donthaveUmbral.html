@@ -11,10 +11,13 @@
             <input type="radio" ng-model="base" value="Default" ng-required="!base" ng-change='baseSelected()'> <strong> (Desde el {{lastLunes.getDate()}}/{{lastLunes.getMonth()+1}}/{{lastLunes.getFullYear()}}
         hasta el {{lastDomingo.getDate()}}/{{lastDomingo.getMonth()+1}}/{{lastDomingo.getFullYear()}})</strong>
             <input type="radio" ng-model="base" value="Especial" ng-required="!base"> Especial
+
             <div id="formulaselect">
+                {{triggerSelected}}
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-baby-formula" aria-hidden="true"></span></span>
-                    <input type="text" class="form-control" placeholder="Fórmula" aria-describedby="basic-addon1" ng-model="formula" required>
+                    <input type="text" class="form-control" placeholder="Fórmula" aria-describedby="basic-addon1" ng-model="formula" value="triggerSelected"
+                        required>
                     <span class="error" ng-show="formulaForm.formula.$error.required">Please enter a fórmula</span>
                 </div>
             </div>

@@ -4,7 +4,8 @@
 <div class="col-md-9">
     <ul class="nav nav-tabs">
         <li ng-repeat="(key,value) in dias" class="{{value.clas}}">
-            <a href="#{{value.nombre}}" ng-click="tabactive(key)">{{value.nombre}} <button type="button" class="btn btn-success btn-xs" ng-click="save()"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></button></a>
+            <a href="" class="tab" ng-click="tabactive(key)">{{value.nombre}} </a>
         </li>
     </ul>
+    <div id="myChart" style="height:400p;width:1900px"></div>
 </div>

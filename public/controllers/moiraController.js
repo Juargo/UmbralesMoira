@@ -1,5 +1,5 @@
 angular.module("graphApp")
-    .controller("moiraCtrl", function ($scope, $compile, $http) {
+    .controller("moiraCtrl", function ($scope, $compile, $http,plot) {
         $scope.triggerguradado = true;
         $scope.grafica = false;
         $.ajax({
@@ -48,7 +48,45 @@ angular.module("graphApp")
             ]
         }
 
-        $scope.graficar = function () { 
+        $scope.graficar = function (indi) {
             $scope.grafica = true;
-         }
+        }
+
+        $scope.tabactive = function (indi) {
+            getUrl($scope.formula, $scope.dias[indi].fi)
+        }
+
+        getUrl = function (urlg, fi) {
+            var puntosn = [];
+            var pw1 = [];
+            var pw2 = [];
+            //var urlg = "aliasByNode(summarize(gwpromo.compra.general.estado.Ok, \"10min\", \"sum\"), 4)"
+            //aliasByNode(summarize(gwpromo.compra.general.estado.Ok, "10min", "sum"), 4)
+           console.log("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + fi)
+            $.get("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + fi, function (data, error) {
+                data = JSON.parse(data);
+                puntos = data[0].datapoints;
+                cantidad = puntos.length;
+                for (var i = 0; i < puntos.length; i++) {
+                    var t = new Date(puntos[i][1] * 1000);
+                    var tt = t.toGMTString();
+                    var tt = tt.substr(0, 25);
+                    ptos_c = puntos[i][0] + 0
+                    puntosn.push([tt, ptos_c]);
+
+                    if (ptos_c < 10) {
+                        pw2.push([tt, 0]);
+                    } else {
+                        pw2.push([tt, ptos_c * 1.2]);
+                    }
+
+                    pw1.push([tt, puntos[i][0] * 0.8]);
+                }
+                $.jqplot.config.enablePlugins = true;
+                data = [puntosn, pw1, pw2];
+
+                console.log("1");
+                plot.setPlot(data);
+            })
+        }
     })
