@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var request = require('request');
+
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -15,21 +18,21 @@ app.listen(3000, function () {
     console.log('Escuchando en 3000')
 })
 
-app.get('/getmoiratriggers',function (req,res) {  
-    var exec = require('child_process').execFile('public/bashtrigger.sh',[]);
-    exec.stdout.on('data',function (data) { 
-        var options="";
+app.get('/getmoiratriggers', function (req, res) {
+    var exec = require('child_process').execFile('public/bashtrigger.sh', []);
+    exec.stdout.on('data', function (data) {
+        var options = "";
         data = JSON.parse(data);
-        for (nombre in data){
+        for (nombre in data) {
             var idnombre = data[nombre].toString();
             idnombre = idnombre.replace(/'/g, '\"').replace(/"/g, '\"');
-            options = options + "<option value='"+ idnombre +"' >"+ nombre + "</option>";
+            options = options + "<option value='" + idnombre + "' >" + nombre + "</option>";
         }
         var select = '<select class="form-control input-sm" data-ng-model="triggerSelected" ng-change="triggerSelect()" id="select"> \
                     ' + options + '\
                     </select>';
         res.send(select);
-     })
+    })
 })
 
 mongoose.connect('mongodb://localhost:27017/UmbralesMoira');
@@ -88,6 +91,15 @@ app.get('/getdataGraph', function (req, res) {
     var tz = "America/Santiago";
     var format = "json";
 
+    var url = "https://192.168.11.35/render/?target=" + formula + '&from=' + from + '&until=' + until + '&tz=' + tz + '&format=' + format;
+
+    request({
+        url: url,
+        json: true
+    }, function (error, response, body) {
+        res.json(body);
+    });
+
     //console.log("https://192.168.11.35/render/?target=" + formula + '&from=' + from + '&until=' + until + '&tz=' + tz + '&format=' + format);
     // var exec = require('child_process').execFile('public/bash.sh',
     //     [
@@ -99,6 +111,6 @@ app.get('/getdataGraph', function (req, res) {
     //     //res.json(data);
     // });
 
-   
+
 })
 

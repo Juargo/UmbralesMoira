@@ -62,9 +62,8 @@ angular.module("graphApp")
             var pw2 = [];
             //var urlg = "aliasByNode(summarize(gwpromo.compra.general.estado.Ok, \"10min\", \"sum\"), 4)"
             //aliasByNode(summarize(gwpromo.compra.general.estado.Ok, "10min", "sum"), 4)
-           console.log("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + fi)
+           //console.log("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + fi)
             $.get("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + fi, function (data, error) {
-                data = JSON.parse(data);
                 puntos = data[0].datapoints;
                 cantidad = puntos.length;
                 for (var i = 0; i < puntos.length; i++) {
@@ -85,7 +84,6 @@ angular.module("graphApp")
                 $.jqplot.config.enablePlugins = true;
                 data = [puntosn, pw1, pw2];
 
-                console.log("1");
                 plot.setPlot(data);
             })
         }
