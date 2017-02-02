@@ -53,7 +53,7 @@ angular.module("graphApp")
 
                 //console.log(jsontrigger.gettrigger());
             } else {
-                //console.log(plot.getid());
+                console.log(plot.getid());
                 $http.get("http://localhost:3000/getid/" + idg.data).then(
                     function (resp) {
                         jsontrigger.settrigger({
@@ -67,8 +67,11 @@ angular.module("graphApp")
                         });
                     }
                 )
+
+                $http.put("http://localhost:3000/update/" +plot.getid().data ,jsontrigger.gettrigger() );
+                // console.log("http://localhost:3000/update/" +plot.getid().data)
             }
-            //console.log(jsontrigger.gettrigger());
+           // console.log(jsontrigger.gettrigger());
         }
 
         $scope.gettriggerconsole=function () {

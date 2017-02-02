@@ -66,8 +66,12 @@ app.put('/update/:id', function (req, res) {
         if (err)
             res.send(err);
 
-        data.trigger = req.query.trigger;
+        //console.log(req.query.trigger);
+        // data.trigger = req.query.trigger;
 
+       //data.formulas[0].datapoint = req.body.formulas[0].datapoint;
+        data.formulas= req.body.formulas;
+       //console.log(req.body.formulas[0].datapoint);
         data.save(function (err) {
             if (err)
                 res.send(err)
