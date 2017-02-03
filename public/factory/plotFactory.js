@@ -1,3 +1,4 @@
+
 angular.module("graphApp")
     .factory("plot", function () {
         plot1 = undefined;

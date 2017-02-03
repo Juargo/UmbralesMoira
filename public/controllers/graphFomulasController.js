@@ -53,8 +53,9 @@ angular.module("graphApp")
                     var data = error.data;
                     // not relevant
                 });
-
-
         }
 
+        $scope.save = function () {
+            console.log("sds")
+        }
     })
