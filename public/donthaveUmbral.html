@@ -1,0 +1,29 @@
+<form name="formulaForm" novalidate>
+    <div class="col-md-1">
+        <h1><strong>2#</strong></h1>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <h2>Escoja rango de fecha que tendrá como base e ingrese fórmula</h2>
+        </div>
+        <div class="row">
+
+            <input type="radio" ng-model="base" value="Default" ng-required="!base" ng-change='baseSelected()'> <strong> (Desde el {{lastLunes.getDate()}}/{{lastLunes.getMonth()+1}}/{{lastLunes.getFullYear()}}
+        hasta el {{lastDomingo.getDate()}}/{{lastDomingo.getMonth()+1}}/{{lastDomingo.getFullYear()}})</strong>
+            <input type="radio" ng-model="base" value="Especial" ng-required="!base"> Especial
+
+            <div id="formulaselect">
+                {{triggerSelected}}
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-baby-formula" aria-hidden="true"></span></span>
+                    <input type="text" class="form-control" placeholder="Fórmula" aria-describedby="basic-addon1" ng-model="formula" value="triggerSelected"
+                        required>
+                    <span class="error" ng-show="formulaForm.formula.$error.required">Please enter a fórmula</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <button ng-disabled="formulaForm.$invalid" class="btn btn-default" ng-click="graficar()">Gráficar<br/><img src="images/formula-icon.png" alt="" style="width: 80px;"></button>
+</div>
+</form>
