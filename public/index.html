@@ -1,0 +1,36 @@
+
+<html ng-app="graphApp">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/jqplot/1.0.8/jquery.jqplot.min.js"></script>
+
+    <script type="text/javascript" src="src/jqplot.canvasTextRenderer.js"></script>
+    <script type="text/javascript" src="src/jqplot.highlighter.js"></script>
+    <script type="text/javascript" src="src/jqplot.dateAxisRenderer.js"></script>
+    <script type="text/javascript" src="src/jqplot.dragable.js"></script>
+    <script type="text/javascript" src="src/jqplot.canvasAxisTickRenderer.js"></script>
+    <!--<script type="text/javascript" src="src/jqplot.pointLabels.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="/src/jquery.jqplot.css" />
+
+    <script>
+        angular.module("graphApp", [])
+    </script>
+
+<script src="controllers/graphFomulasController.js"></script>
+<script src="controllers/graphController.js"></script>
+<script src="factory/plotFactory.js"></script>
+<script src="factory/jsonFactory.js"></script>
+</head>
+
+<body>
+    <div id="grafico" ng-controller="graphController">
+        <div id="myChart" style="height:400p;width:1900px"></div>
+</div>
+</body>
+
+</html>
