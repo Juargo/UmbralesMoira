@@ -1,52 +1,41 @@
-<html ng-app="graphApp">
+<html ng-app="umbralesApp">
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/jqplot/1.0.8/jquery.jqplot.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jqplot/1.0.8/jquery.jqplot.min.js"></script>
 
-    <script type="text/javascript" src="src/jqplot.canvasTextRenderer.js"></script>
-    <script type="text/javascript" src="src/jqplot.highlighter.js"></script>
-    <script type="text/javascript" src="src/jqplot.dateAxisRenderer.js"></script>
-    <script type="text/javascript" src="src/jqplot.dragable.js"></script>
-    <script type="text/javascript" src="src/jqplot.canvasAxisTickRenderer.js"></script>
+        <script type="text/javascript" src="src/jqplot.canvasTextRenderer.js"></script>
+        <script type="text/javascript" src="src/jqplot.highlighter.js"></script>
+        <script type="text/javascript" src="src/jqplot.dateAxisRenderer.js"></script>
+        <script type="text/javascript" src="src/jqplot.dragable.js"></script>
+        <script type="text/javascript" src="src/jqplot.canvasAxisTickRenderer.js"></script>
 
-    <script>
-        angular.module("graphApp", []);
-    </script>
-<script src="controllers/moiraController.js"></script>
-<script src="directives/SecPartDirective.js"></script>
-<script src="directives/thiPartDirective.js"></script>
-<script src="factory/plotFactory.js"></script>
+        <script>
+            angular.module("umbralesApp", []);
+        </script>
+        <script src="controllers/baseController.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid" ng-controller="moiraCtrl">
-        <div class="row" id="moiratrigger">
-            <div class="col-md-1">
-                <h1><strong>1#</strong></h1>
-            </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <h2>Selecciona el <kbd>Trigger</kbd> moira para configurar sus umbrales diarios</h2>
+    <div class="container-fluid" ng-controller="baseController">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group" id="trigger"></div>
+                    </divs>
                 </div>
-                <div class="row">
-                    <div id="moiratriggerselect"></div>
-                </div>
-                <div class="alert alert-warning" role="alert" ng-hide="triggerguradado"><strong> **Trigger no posee umbrales creados </strong></div>
             </div>
-            <div class="col-md-2"><img src="images/moira.png" alt=""></div>
-        </div>
-        <div class="row" id="formulas">
-            <div donthave-umbral ng-hide="triggerguradado"></div>
-        </div>
-        <div class="row" id="grafico" ng-show="grafica">
-            <div check-secondpart></div>
+            <div class="col-md-9"></div>
         </div>
     </div>
 </body>
