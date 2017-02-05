@@ -8,15 +8,24 @@ angular.module("umbralesApp")
         function(resp){
             var textHtml="";
             for(trigger in resp.data){
-                formula = resp.data[trigger].toString().substring(0,38) + " " + resp.data[trigger].toString().substring(38);
-                formula = formula.substring(0,110) + " " + formula.substring(110);
+                var texto = resp.data[trigger].toString().split("");
+                var multiplo = 38;
+                for(var i=0;i<texto.length;i++){
+                    if(i % multiplo == 0 && i!=0){
+                        if(i==multiplo){
+                            formula = resp.data[trigger].toString().substring(0,i) + " " + resp.data[trigger].toString().substring(i);
+                        }else{
+                            formula = formula.substring(0,i) + " " + formula.substring(i); 
+                        }
+                        
+                    }
+                }
+
                 textHtml=textHtml +
                 '<a href="#" class="list-group-item">' +
                 '   <h4 class="list-group-item-heading">'+ trigger +'</h4>'+
                 '   <p class="list-group-item-text">'+formula+'</p>'+
                 '</a>';
-                // console.log(resp.data[trigger].toString().substring(0,38));
-                // console.log(resp.data[trigger].toString().substring(15));
             }
             
             $("#trigger").append($compile(textHtml)($scope));

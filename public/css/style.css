@@ -1,0 +1,11 @@
+.panel-body{
+    padding: 2px;
+}
+
+.panel.panel-primary{
+    overflow: scroll;
+    height: 95%;
+}
+p{
+    font-size: 11px;
+}
