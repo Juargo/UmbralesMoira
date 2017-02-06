@@ -9,3 +9,9 @@
 p{
     font-size: 11px;
 }
+
+.alert.alert-warning{
+    padding: 0px;
+    padding-left: 9px;
+    margin-bottom: 7px;
+}

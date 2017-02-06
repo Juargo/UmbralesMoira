@@ -32,3 +32,24 @@ app.get('/getmoiratriggers', function (req, res) {
         res.json(body);
     });
 });
+
+mongoose.connect('mongodb://localhost:27017/UmbralesMoira');
+
+umbrales = mongoose.model('Umbral', {
+    trigger: String,
+    formulas: [
+        {
+            nombre: String,
+            formula: String,
+            datapoint: []
+        }
+    ]
+});
+
+app.get('/getbyname/:nombre', function (req, res) {
+    umbrales.find({ 'trigger': req.params.nombre }, function (err, data) {
+        if (err)
+            res.send(err);
+        res.json(data);
+    })
+})

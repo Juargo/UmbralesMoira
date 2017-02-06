@@ -24,7 +24,9 @@
 
 <body>
     <div class="container-fluid" ng-controller="baseController">
-        <div class="row"><div class="col-md-12"></div></div>
+        <div class="row">
+            <div class="col-md-12"></div>
+        </div>
         <div class="row">
             <div class="col-md-3">
                 <div class="panel panel-primary">
@@ -36,7 +38,39 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9"></div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <select class="form-control">
+
+                        </select>
+                        <div class="alert alert-warning" role="alert" ng-show="triggerguradado">
+                            <strong> **Trigger no posee umbrales creados </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Gráfico
+                                    <input type="radio" ng-model="base" value="Default" ng-required="!base" ng-change='baseSelected()'>                                    <strong> (Desde el {{lastLunes.getDate()}}/{{lastLunes.getMonth()+1}}/{{lastLunes.getFullYear()}}
+        hasta el {{lastDomingo.getDate()}}/{{lastDomingo.getMonth()+1}}/{{lastDomingo.getFullYear()}})</strong>
+                                    <input type="radio" ng-model="base" value="Especial" ng-required="!base"> Especial
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="nav nav-tabs">
+                                    <li ng-repeat="(key,value) in dias" class="{{value.clas}}">
+                                        <a href="" class="tab" ng-click="tabactive(key)">{{value.nombre}} </a>
+                                    </li>
+                                </ul>
+                                <div id="myChart" style="height:400p;width:1900px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
