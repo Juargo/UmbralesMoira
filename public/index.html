@@ -20,9 +20,10 @@
             angular.module("umbralesApp", []);
         </script>
         <script src="controllers/baseController.js"></script>
+        <script src="services/triggerFactory.js"></script>
 </head>
 
-<body>
+<body ng-controller="baseController">
     <div class="container-fluid" ng-controller="baseController">
         <div class="row">
             <div class="col-md-12"></div>
@@ -34,7 +35,12 @@
                         <h3 class="panel-title">Trigger Moira</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="list-group" id="trigger"></div>
+                        <div class="list-group" id="trigger">
+                            <a href="#" class="list-group-item" ng-repeat="(nombre,formula) in triggers" ng-click="triggerSelect($event,nombre)">
+                                <h4 class="list-group-item-heading">{{nombre}}</h4>
+                                <p class="list-group-item-text">{{formula}}</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

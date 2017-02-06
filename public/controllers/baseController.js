@@ -1,36 +1,15 @@
 angular.module("umbralesApp")
-    .controller("baseController", function ($scope, $http, $compile) {
+    .controller("baseController", function ($scope, $http, trigger) {
         $scope.triggerguardado = true;
         $scope.grafica = false;
 
-        $http.get("http://localhost:3000/getmoiratriggers")
-            .then(
+        $http.get("http://localhost:3000/getmoiratriggers").then(
             function (resp) {
-                var textHtml = "";
-                for (trigger in resp.data) {
-                    var texto = resp.data[trigger].toString().split("");
-                    var multiplo = 38;
-                    for (var i = 0; i < texto.length; i++) {
-                        if (i % multiplo == 0 && i != 0) {
-                            if (i == multiplo) {
-                                formula = resp.data[trigger].toString().substring(0, i) + " " + resp.data[trigger].toString().substring(i);
-                            } else {
-                                formula = formula.substring(0, i) + " " + formula.substring(i);
-                            }
-
-                        }
-                    }
-
-                    textHtml = textHtml +
-                        '<a href="#" class="list-group-item" ng-click="triggerSelect($event,\'' + trigger + '\')">' +
-                        '   <h4 class="list-group-item-heading">' + trigger + '</h4>' +
-                        '   <p class="list-group-item-text">' + formula + '</p>' +
-                        '</a>';
-                }
-
-                $("#trigger").append($compile(textHtml)($scope));
+                trigger.settrigger(resp.data,38);
+                $scope.triggers = trigger.gettrigger();
             }
-            );
+        );
+
 
         $scope.triggerSelect = function (event, trigger) {
             $("#trigger").find(".active").removeClass("active")
@@ -75,5 +54,5 @@ angular.module("umbralesApp")
                 { fi: $scope.lastDomingo.getFullYear().toString() + "_" + ($scope.lastDomingo.getMonth() + 1).toString() + "_" + $scope.lastDomingo.getDate().toString(), class: "", nombre: "Domingo" },
             ]
         }
-        
+
     })
