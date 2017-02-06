@@ -33,6 +33,44 @@ app.get('/getmoiratriggers', function (req, res) {
     });
 });
 
+app.get('/getdataGraph', function (req, res) {
+    var bash = [];
+    var formula = req.query.formula;
+    formula = formula.replace(/ /g, '%20').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/,/g, '%2C').replace(/\"/g, '%22');
+
+    var fi = req.query.fi;
+
+    //var from = "00:00_20161205" ;
+    //var until = "00:00_20161206";
+
+    anno = fi.split("_")[0];
+    if (fi.split("_")[1] < 10) {
+        mes = "0" + fi.split("_")[1].toString();
+    } else {
+        mes = fi.split("_")[1]
+    }
+    if (fi.split("_")[2] < 10) {
+        dia = "0" + fi.split("_")[2].toString();
+    } else {
+        dia = fi.split("_")[2]
+    }
+
+    var from = "00:00_" + anno + mes + dia;
+    var until = "23:59_" + anno + mes + dia;
+    var tz = "America/Santiago";
+    var format = "json";
+
+    var url = "https://192.168.11.35/render/?target=" + formula + '&from=' + from + '&until=' + until + '&tz=' + tz + '&format=' + format;
+
+    request({
+        url: url,
+        json: true
+    }, function (error, response, body) {
+        res.json(body);
+    });
+})
+
+
 mongoose.connect('mongodb://localhost:27017/UmbralesMoira');
 
 umbrales = mongoose.model('Umbral', {

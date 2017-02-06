@@ -1,6 +1,7 @@
 angular.module("umbralesApp")
 .factory("trigger",function(){
     trigger=undefined;
+    ntrigger=undefined;
     return{
         gettrigger: function(){
             return trigger;
@@ -20,6 +21,12 @@ angular.module("umbralesApp")
                 data[triggerx] = formula;
             }
             trigger=data;
+        },
+        setntrigger: function(data){
+            ntrigger = data;
+        },
+        getntrigger: function(){
+            return ntrigger;
         }
     }
 })
