@@ -62,6 +62,7 @@ app.get('/getdataGraph', function (req, res) {
 
     var url = "https://192.168.11.35/render/?target=" + formula + '&from=' + from + '&until=' + until + '&tz=' + tz + '&format=' + format;
 
+    console.log(url);
     request({
         url: url,
         json: true

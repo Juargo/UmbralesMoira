@@ -33,26 +33,7 @@ angular.module("umbralesApp")
             trigger.setntrigger(triggery);
         }
 
-        // var beforeOneWeek = new Date(new Date().getTime() - 60 * 60 * 24 * 7 * 1000)
-        // day = beforeOneWeek.toString().split(/ /g)[2];
-        // diffToMonday = beforeOneWeek.getDate() - day + (day === 0 ? -6 : 1);
-        // $scope.lastLunes = new Date(beforeOneWeek.setDate(diffToMonday))
-        // $scope.lastMartes = new Date(beforeOneWeek.setDate(diffToMonday + 1))
-        // $scope.lastMiercoles = new Date(beforeOneWeek.setDate(diffToMonday + 2))
-        // $scope.lastJueves = new Date(beforeOneWeek.setDate(diffToMonday + 3))
-        // $scope.lastViernes = new Date(beforeOneWeek.setDate(diffToMonday + 4))
-        // $scope.lastSabado = new Date(beforeOneWeek.setDate(diffToMonday + 5))
-        // $scope.lastDomingo = new Date(beforeOneWeek.setDate(diffToMonday + 6));
-
-        //Mon Lunes
-        //Tue Martes
-        //Wed Miercoles
-        //Thu Jueves
-        //Fri Viernes
-        //Sat Sabado
-        //Sun Domingo
-
-        var mes=[];
+        var mes = [];
         mes['Jan'] = '01';
         mes['Feb'] = '02';
         mes['Mar'] = '03';
@@ -69,7 +50,7 @@ angular.module("umbralesApp")
         date = new Date();
         date = date.toString().split(/ /g);
 
-        var dia=[];
+        var dia = [];
         dia['Mon'] = 7;
         dia['Tue'] = 8;
         dia['Wed'] = 9;
@@ -78,10 +59,10 @@ angular.module("umbralesApp")
         dia['Sat'] = 12;
         dia['Sun'] = 13;
 
-        dd =  new Date(mes[date[1]]+ '-' +  date[2]+ '-' + date[3]);
+        dd = new Date(mes[date[1]] + '-' + date[2] + '-' + date[3]);
         dd.setDate(dd.getDate() - dia[date[0]]);
-        
-        base=dd;
+
+        base = dd;
         $scope.lastLunes = new Date(base);
         $scope.lastMartes = new Date(base.setDate(dd.getDate() + 1));
         $scope.lastMiercoles = new Date(base.setDate(dd.getDate() + 1));
@@ -90,7 +71,7 @@ angular.module("umbralesApp")
         $scope.lastSabado = new Date(base.setDate(dd.getDate() + 1));
         $scope.lastDomingo = new Date(base.setDate(dd.getDate() + 1));
 
-        
+
         //00:00_20161205
         $scope.baseSelected = function () {
             $scope.dias = [
@@ -107,7 +88,11 @@ angular.module("umbralesApp")
 
         $scope.tabactive = function (indi) {
             formula1 = $scope.triggers[trigger.getntrigger()].replace(/ /g, "");
-            getUrl(formula1, $scope.dias[indi].fi)
+            plot1 = plot.getPlot();
+            if (plot1 != undefined) {
+                plot1.destroy();
+            }
+            getUrl(formula1, $scope.dias[indi].fi);
             //console.log($scope.triggers[trigger.getntrigger()].replace(/ /g,""));
         }
 
@@ -118,6 +103,7 @@ angular.module("umbralesApp")
             //var urlg = "aliasByNode(summarize(gwpromo.compra.general.estado.Ok, \"10min\", \"sum\"), 4)"
             //aliasByNode(summarize(gwpromo.compra.general.estado.Ok, "10min", "sum"), 4)
             //console.log("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + fi)
+            console.log(urlg);
             $.get("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + fi, function (data, error) {
                 puntos = data[0].datapoints;
                 cantidad = puntos.length;
@@ -131,10 +117,10 @@ angular.module("umbralesApp")
                     if (ptos_c < 10) {
                         pw2.push([tt, 0]);
                     } else {
-                        pw2.push([tt, ptos_c * 1.2]);
+                        pw2.push([tt, ptos_c * 1.5]);
                     }
 
-                    pw1.push([tt, puntos[i][0] * 0.8]);
+                    pw1.push([tt, puntos[i][0] * 0.5]);
                 }
                 $.jqplot.config.enablePlugins = true;
                 data = [puntosn, pw1, pw2];

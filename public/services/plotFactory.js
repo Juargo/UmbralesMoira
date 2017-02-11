@@ -9,37 +9,38 @@ angular.module("umbralesApp")
             setPlot: function (data) {
                 plot1 = $.jqplot('myChart', data, {
                     title: "Umbrales",
-                    series: [{}, {
-                        //linePattern: 'dotted',
-                        linePattern: 'dashed',
-                        lineWidth: 1,
-                        showMarker: false,
-                        shadow: false,
-                        //pointLabels: { show:true } 
-                        markerOptions: { style: "circle" }
-                    }, {
-                        linePattern: 'dotted',
-                        showMarker: false,
-                        shadow: false
-                    }],
+                    series: [
+                        {
+                            renderer: $.jqplot.LineRenderer,
+                            color: 'pink',
+                            isDragable: false,
+                            lineWidth: 1,
+                            markerOptions: { style: "filledCircle", size: 3.0 }
+                        },
+                        {
+                            lineWidth: 1,
+                            markerOptions: { style: "filledCircle", size: 5.0 }
+                        },
+                        {
+                            lineWidth: 1,
+                            markerOptions: { style: "filledCircle", size: 5.0 }
+                        }
+                    ],
                     axes: {
                         xaxis: {
                             renderer: $.jqplot.DateAxisRenderer,
                             tickRenderer: $.jqplot.CanvasAxisTickRenderer,
                             tickOptions: {
-                                formatString: "%H:%M",
-                                angle: -45
+                                formatString: "%H:%M"
                             }
                         }
                     },
-                    highligther: {
-                        sizeAdjust: 10,
-                        tooltipLocation: 'n',
+                    highlighter: {
                         tooltipAxes: 'both',
-                        tooltipFormatString: '<b><i><span>%s , </span></i></b> %.2f',
-                        useAxesFormatters: false
+                        yvalues: 3,
+                        formatString: '<table class="jqplot-highlighter"><tr><td>hi:</td><td>%s</td></tr><tr><td>low:</td><td>%s</td></tr><tr><td>close:</td><td>%s</td></tr></table>'
                     }
-                })
+                });
             }
 
         }
