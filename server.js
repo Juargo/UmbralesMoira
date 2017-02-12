@@ -39,24 +39,30 @@ app.get('/getdataGraph', function (req, res) {
     formula = formula.replace(/ /g, '%20').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/,/g, '%2C').replace(/\"/g, '%22');
 
     var fi = req.query.fi;
+    var ff = req.query.ff;
 
     //var from = "00:00_20161205" ;
     //var until = "00:00_20161206";
 
-    anno = fi.split("_")[0];
-    if (fi.split("_")[1] < 10) {
-        mes = "0" + fi.split("_")[1].toString();
-    } else {
-        mes = fi.split("_")[1]
-    }
-    if (fi.split("_")[2] < 10) {
-        dia = "0" + fi.split("_")[2].toString();
-    } else {
-        dia = fi.split("_")[2]
+    annofi = fi.split("_")[0];
+    annoff = ff.split("_")[0];
+
+    function formatDate(a,index){
+        if (a.split("_")[index] < 10){
+            b = "0" + a.split("_")[index].toString();
+        }else{
+            b = a.split("_")[index];
+        }
+        return b;
     }
 
-    var from = "00:00_" + anno + mes + dia;
-    var until = "23:59_" + anno + mes + dia;
+    mesfi = formatDate(fi,1);
+    mesff = formatDate(ff,1);
+    diafi = formatDate(fi,2);
+    diaff = formatDate(ff,2);
+
+    var from = "00:00_" + annofi + mesfi + diafi;
+    var until = "23:59_" + annoff + mesff + diaff;
     var tz = "America/Santiago";
     var format = "json";
 
