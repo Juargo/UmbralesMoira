@@ -54,7 +54,7 @@ angular.module("umbralesApp")
                     var tt = tt.substr(0, 25);
                     var tt = tt.toString().split(/ /g);
                     //Tue, 31 Jan 2017 01:10:00
-                    if(tt[1] == formatDate(dia)){
+                    if(tt[1] == formatDate(dia) && puntos[i][0] != null){
                         newpuntos.push(puntos[i]);
                     }
                 }

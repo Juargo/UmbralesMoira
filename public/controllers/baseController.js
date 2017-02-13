@@ -55,8 +55,10 @@ angular.module("umbralesApp")
 
         getUrl = function (urlg, fi,ff) {
             var puntosn = [];
-            var pw1 = [];
-            var pw2 = [];
+            var pwu = []; //puntos warning up
+            var pwd = []; //puntos warning down
+            var pcu = []; //puntos critical up
+            var pcd = []; //puntos critical down
             //var urlg = "aliasByNode(summarize(gwpromo.compra.general.estado.Ok, \"10min\", \"sum\"), 4)"
             //aliasByNode(summarize(gwpromo.compra.general.estado.Ok, "10min", "sum"), 4)
             //console.log("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + fi)
@@ -68,8 +70,12 @@ angular.module("umbralesApp")
                     var t = new Date(puntos[i][1] * 1000);
                     var tt = t.toGMTString();
                     var tt = tt.substr(0, 25);
-                    ptos_c = puntos[i][0] + 0
-                    puntosn.push([tt, ptos_c]);
+                    //ptos_c = puntos[i][0] + 0
+                    puntosn.push([tt,puntos[i][0]]);
+                    pwu.push([tt,puntos[i][0]*1.2]);
+                    pwd.push([tt,puntos[i][0]*0.2]);
+                    pcu.push([tt,puntos[i][0]*1.5]);
+                    pcd.push([tt,puntos[i][0]*0.5])
 
                     // if (ptos_c < 10) {
                     //     pw2.push([tt, 0]);
@@ -84,7 +90,7 @@ angular.module("umbralesApp")
                     console.log("p: " + puntosn[i] );
                 }
                 $.jqplot.config.enablePlugins = true;
-                data = [puntosn];
+                data = [puntosn,pwu,pwd,pcu,pcd];
 
                 plot.setPlot(data);
             })
