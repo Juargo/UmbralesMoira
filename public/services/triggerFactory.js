@@ -2,7 +2,14 @@ angular.module("umbralesApp")
 .factory("trigger",function(){
     trigger=undefined;
     ntrigger=undefined;
+    triggerguardado=false;
     return{
+        settriggerguardado:function(a){
+            triggerguardado = a;
+        },
+        gettriggerguardado: function(){
+            return triggerguardado;
+        },
         gettrigger: function(){
             return trigger;
         },

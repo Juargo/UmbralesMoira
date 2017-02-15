@@ -13,6 +13,10 @@ angular.module("umbralesApp")
         date = new Date(mes[dateString[1]] + '-' + dateString[2] + '-' + dateString[3]);
         date.setDate(date.getDate() - dia[dateString[0]]);
 
+        dy = date;
+        lunes = new Date(dy.setDate(date.getDate()));
+        domingo = new Date(dy.setDate(lunes.getDate()+6));
+
         function formatDay(d, a) {
             if (a == -1) {
                 d = new Date(d.setDate(d.getDate() - 1));
@@ -36,6 +40,12 @@ angular.module("umbralesApp")
         return {
             getWeek: function () {
                 return dias;
+            },
+            getLunes:function(){
+                return lunes;
+            },
+            getDomingo:function(){
+                return domingo;
             },
             getOnly: function (puntos,dia) {
                 newpuntos=[];

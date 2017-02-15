@@ -1,11 +1,14 @@
 angular.module("umbralesApp")
     .factory("plot", function () {
         plot1 = undefined;
+        plot2 = undefined;
         return {
-            getPlot: function () {
+            getPlot1: function () {
                 return plot1;
             },
-
+            getPlot2: function () {
+                return plot2;
+            },
             setPlot: function (data) {
                 var legendLabels = ['Data', 'WarningUp', 'WarningDown', 'CriticalUp', 'CriticalDown'];
                 plot1 = $.jqplot('myChart', data, {
@@ -17,12 +20,12 @@ angular.module("umbralesApp")
                             showBorders: false
                         }
                     },
-                    legend: {
-                        show: true,
-                        location: 's',
-                        labels: legendLabels,
-                        rendererOptions: { numberRows: 2, placement: "outside" }
-                    },
+                    // legend: {
+                    //     show: true,
+                    //     location: 's',
+                    //     labels: legendLabels,
+                    //     rendererOptions: { numberRows: 2, placement: "outside" }
+                    // },
                     series: [
                         {
                             renderer: $.jqplot.LineRenderer,
@@ -76,7 +79,7 @@ angular.module("umbralesApp")
                     }
                 });
 
-                controllerPlot = $.jqplot('chart2', data, {
+                plot2 = $.jqplot('chart2', data, {
                     seriesDefaults: { showMarker: false },
                     series: [
                         {
@@ -87,22 +90,22 @@ angular.module("umbralesApp")
                             markerOptions: { style: "filledCircle", size: 3.0 }
                         },
                         {
-                            show:false,
+                            show: false,
                             lineWidth: 1,
                             markerOptions: { style: "filledCircle", size: 5.0 }
                         },
                         {
-                            show:false,
+                            show: false,
                             lineWidth: 1,
                             markerOptions: { style: "filledCircle", size: 5.0 }
                         },
                         {
-                            show:false,
+                            show: false,
                             lineWidth: 1,
                             markerOptions: { style: "filledCircle", size: 5.0 }
                         },
                         {
-                            show:false,
+                            show: false,
                             lineWidth: 1,
                             markerOptions: { style: "filledCircle", size: 5.0 }
                         }
@@ -131,7 +134,7 @@ angular.module("umbralesApp")
                     }
                 });
 
-                $.jqplot.Cursor.zoomProxy(plot1, controllerPlot);
+                $.jqplot.Cursor.zoomProxy(plot1, plot2);
 
                 $.jqplot._noToImageButton = true;
             }

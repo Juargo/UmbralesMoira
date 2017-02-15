@@ -26,66 +26,33 @@
             angular.module("umbralesApp", []);
         </script>
         <script src="controllers/baseController.js"></script>
+        <script src="directive/triggermoira.js"></script>
+        <script src="directive/triggerguardado.js"></script>
+        <script src="directive/panelgrafico.js"></script>
         <script src="services/triggerFactory.js"></script>
         <script src="services/plotFactory.js"></script>
         <script src="services/weekFactory.js"></script>
 </head>
 
 <body ng-controller="baseController">
-    <div class="container-fluid" ng-controller="baseController">
-        <div class="row">
-            <div class="col-md-12"></div>
-        </div>
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Trigger Moira</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="list-group" id="trigger">
-                            <a href="#" class="list-group-item" ng-repeat="(nombre,formula) in triggers" ng-click="triggerSelect($event,nombre)">
-                                <h4 class="list-group-item-heading">{{nombre}}</h4>
-                                <p class="list-group-item-text">{{formula}}</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <trigger-moira></trigger-moira>
             </div>
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-12">
-                        <select class="form-control">
-
-                        </select>
-                        <div class="alert alert-warning" role="alert" ng-show="triggerguradado">
-                            <strong> **Trigger no posee umbrales creados </strong>
-                        </div>
+                        <trigger-guardado></trigger-guardado>
                     </div>
                 </div>
-                <div class="row">
+                 <div class="row" style="margin-top:5px">
                     <div class="col-md-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Gráfico
-                                    <input type="radio" ng-model="base" value="Default" ng-required="!base" ng-change='baseSelected()'>                                    <strong> (Desde el {{lastLunes.getDate()}}/{{lastLunes.getMonth()+1}}/{{lastLunes.getFullYear()}}
-        hasta el {{lastDomingo.getDate()}}/{{lastDomingo.getMonth()+1}}/{{lastDomingo.getFullYear()}})</strong>
-                                    <input type="radio" ng-model="base" value="Especial" ng-required="!base"> Especial
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <ul class="nav nav-tabs">
-                                    <li ng-repeat="(key,value) in dias" class="{{value.clas}}">
-                                        <a href="" class="tab" ng-click="tabactive(key)">{{value.nombre}} </a>
-                                    </li>
-                                </ul>
-                                <div id="myChart" style="height:400p"></div>
-                                <div id="chart2" style="margin-top: 30px; height: 100px; width: 600px; position: relative;">
-                            </div>
-                        </div>
+                       <panel-grafico></panel-grafico>
                     </div>
                 </div>
             </div>
+            </div>  
         </div>
     </div>
 </body>
