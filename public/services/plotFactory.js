@@ -2,12 +2,19 @@ angular.module("umbralesApp")
     .factory("plot", function () {
         plot1 = undefined;
         plot2 = undefined;
+        showbuttom = false;
         return {
             getPlot1: function () {
                 return plot1;
             },
             getPlot2: function () {
                 return plot2;
+            },
+            getshowbuttom: function(){
+                return showbuttom;
+            },
+            setshowbuttom: function(a){
+                showbuttom = a;
             },
             setPlot: function (data) {
                 var legendLabels = ['Data', 'WarningUp', 'WarningDown', 'CriticalUp', 'CriticalDown'];
@@ -79,6 +86,7 @@ angular.module("umbralesApp")
                     }
                 });
 
+                //console.log(plot1);
                 plot2 = $.jqplot('chart2', data, {
                     seriesDefaults: { showMarker: false },
                     series: [
@@ -137,6 +145,13 @@ angular.module("umbralesApp")
                 $.jqplot.Cursor.zoomProxy(plot1, plot2);
 
                 $.jqplot._noToImageButton = true;
+
+
+                    plot1.series[1].show = false;
+                    plot1.series[2].show = false;
+                    plot1.series[3].show = false;
+                    plot1.series[4].show = false;
+                    plot1.replot();
             }
 
         }

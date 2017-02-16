@@ -13,9 +13,14 @@ angular.module("umbralesApp")
         date = new Date(mes[dateString[1]] + '-' + dateString[2] + '-' + dateString[3]);
         date.setDate(date.getDate() - dia[dateString[0]]);
 
+        //console.log(date);
+
         dy = date;
         lunes = new Date(dy.setDate(date.getDate()));
         domingo = new Date(dy.setDate(lunes.getDate()+6));
+
+        date = new Date(mes[dateString[1]] + '-' + dateString[2] + '-' + dateString[3]);
+        date.setDate(date.getDate() - dia[dateString[0]]);
 
         function formatDay(d, a) {
             if (a == -1) {
@@ -26,7 +31,6 @@ angular.module("umbralesApp")
             dayText = d.getFullYear().toString() + "_" + (d.getMonth() + 1).toString() + "_" + d.getDate().toString();
             return dayText;
         }
-
         dias = [
             { fi: formatDay(date, -1), ff: formatDay(date, 1), class: "active", nombre: "Lunes" },
             { fi: formatDay(date, 0), ff: formatDay(date, 1), class: "", nombre: "Martes" },

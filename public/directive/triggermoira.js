@@ -1,5 +1,5 @@
 angular.module("umbralesApp")
-    .directive("triggerMoira", function ($http, trigger) {
+    .directive("triggerMoira", function ($http, trigger,plot) {
         return {
             restrict: 'E',
             templateUrl: 'templates/trigger-moira.html',
@@ -12,10 +12,21 @@ angular.module("umbralesApp")
                 );
 
                 $scope.triggerSelect = function (event, triggery) {
+                    plot.setshowbuttom(false);
+                    $scope.showbuttom = plot.getshowbuttom();
+                    $scope.nodata = false;
                     $scope.weekdefault = false;
-                    $('input[type="radio"]').prop('checked',false);
+                    $('input[type="radio"]').prop('checked', false);
                     $("#trigger").find(".active").removeClass("active");
                     elementName = $(event.target)[0].localName;
+                    
+                    plot1 = plot.getPlot1();
+                    plot2 = plot.getPlot2();
+
+                    if (plot1 != undefined) {
+                        plot1.destroy();
+                        plot2.destroy();
+                    }
 
                     if (elementName == "a") {
                         $(event.target).addClass("active");
@@ -31,7 +42,7 @@ angular.module("umbralesApp")
                                 trigger.settriggerguardado(false);
                             }
 
-                            $scope.triggeshowguardado = trigger.gettriggerguardado();
+                            $scope.triggershowguardado = trigger.gettriggerguardado();
                         }
                     );
 
