@@ -72,7 +72,7 @@ angular.module("umbralesApp")
 
                     
                 } else if (type == 'old') {
-
+                    
                 }
             }
         }

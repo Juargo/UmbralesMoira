@@ -140,6 +140,20 @@ angular.module("umbralesApp")
                             }, function (error) {
                                 var data = error.data;
                             });
+                    }else{
+                        jsonumbral.setjsonumbral({
+                            type: 'new',
+                            pwu: plot1.series[1].data,
+                            pwd: plot1.series[2].data,
+                            pcu: plot1.series[3].data,
+                            pcd: plot1.series[4].data,
+                            dias: week.getWeek(),
+                            ndia: ndia, //Día escogido a guardar
+                            nombreumbral: nombreUmbral,
+                            trigger: $(".triggerscroll").find(".active").find("h4").html()
+                        });
+
+                        $http.put("http://localhost:3000/update/" +plot.getid() ,jsonumbral.getjsonumbral());
                     }
                 }
             }

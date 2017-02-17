@@ -123,3 +123,17 @@ app.delete('/deleteall', function (req, res) {
         }
     })
 })
+
+app.put('/update/:id', function (req, res) {
+    umbrales.findById(req.params.id, function (err, data) {
+        if (err)
+            res.send(err);
+        data.formulas= req.body.formulas;
+        data.save(function (err) {
+            if (err)
+                res.send(err)
+
+            res.json(data);
+        })
+    })
+})
