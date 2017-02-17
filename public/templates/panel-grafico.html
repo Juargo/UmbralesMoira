@@ -1,8 +1,11 @@
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">Panel
-
-            <button type="button" ng-show="triggershowguardado" class="btn btn-info btn-xs" ng-click='baseSelected(0)' style="margin-left:47%">
+            <div class="input-group" ng-show="triggershowguardado" style="width:46%;float:right">
+                <div class="input-group-addon"> <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></div>
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Nombre" ng-model="nombreUmbral">
+            </div>
+            <button type="button" ng-show="triggershowguardado" class="btn btn-info btn-xs" ng-click='baseSelected(0)' style="margin-left:10%">
                 <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 
                 Desde el {{lastLunes.getDate()}}/{{lastLunes.getMonth()+1}}/{{lastLunes.getFullYear()}}
                 hasta el {{lastDomingo.getDate()}}/{{lastDomingo.getMonth()+1}}/{{lastDomingo.getFullYear()}}
@@ -16,7 +19,7 @@
     <div class="panel-body">
         <ul class="nav nav-tabs" ng-show="weekdefault">
             <li ng-repeat="(key,value) in dias" class="{{value.clas}} dias">
-                <a href="" class="tab" ng-click="tabactive(key,$event)">{{value.nombre}} </a>
+                <a href="" class="tab" ng-click="tabactive(key,$event,value.nombre,numbralesguardados)">{{value.nombre}} </a>
             </li>
         </ul>
         <div class="alert alert-danger" role="alert" ng-show="nodata">
@@ -34,5 +37,14 @@
                 Critical
         </button>
 
+        <button type="button" ng-show="showbuttom" class="btn btn-default btn-md" ng-click="All()">
+            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 
+                All
+        </button>
+
+        <button type="button" ng-show="showbuttom" class="btn btn-success btn-md" ng-click="guardar(gdia,nombreUmbral)">
+            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> 
+                Guardar {{gdia}}
+        </button>
     </div>
 </div>

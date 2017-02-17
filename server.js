@@ -90,11 +90,36 @@ umbrales = mongoose.model('Umbral', {
         }
     ]
 });
-
+app.get('/getall', function (req, res) {
+    umbrales.find(function (err, rutas) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(rutas);
+    });
+});
 app.get('/getbyname/:nombre', function (req, res) {
     umbrales.find({ 'trigger': req.params.nombre }, function (err, data) {
         if (err)
             res.send(err);
         res.json(data);
+    })
+});
+
+app.post('/insert', function (req, res) {
+    var a = new umbrales(req.body)
+    a.save().then(function (data) {
+        res.json({ status: 500, data: data.id });
+        res.end();
+    })
+});
+
+app.delete('/deleteall', function (req, res) {
+    umbrales.remove({}, function (err) {
+        if (err) {
+            console.log(err)
+        } else {
+            res.end('success');
+        }
     })
 })

@@ -3,7 +3,17 @@ angular.module("umbralesApp")
         plot1 = undefined;
         plot2 = undefined;
         showbuttom = false;
+        id=undefined;
         return {
+            setid: function (a) {  
+                id=a;
+            },
+            getid: function(){
+                return id;
+            },
+            resetid:function () {  
+                id=undefined;
+            },
             getPlot1: function () {
                 return plot1;
             },
@@ -36,25 +46,31 @@ angular.module("umbralesApp")
                     series: [
                         {
                             renderer: $.jqplot.LineRenderer,
-                            color: 'pink',
+                            color: '#23527c',
                             isDragable: false,
                             lineWidth: 1,
                             markerOptions: { style: "filledCircle", size: 3.0 }
                         },
                         {
                             lineWidth: 1,
+                            color:'#EEA52E',
+                            linePattern: 'dashed',
                             markerOptions: { style: "filledCircle", size: 5.0 }
                         },
                         {
                             lineWidth: 1,
+                            color:'#EE9A2E',
+                            linePattern: 'dashed',
                             markerOptions: { style: "filledCircle", size: 5.0 }
                         },
                         {
                             lineWidth: 1,
+                            color:'#C9302C',
                             markerOptions: { style: "filledCircle", size: 5.0 }
                         },
                         {
                             lineWidth: 1,
+                            color: '#DF3531',
                             markerOptions: { style: "filledCircle", size: 5.0 }
                         }
                     ],
@@ -92,7 +108,7 @@ angular.module("umbralesApp")
                     series: [
                         {
                             renderer: $.jqplot.LineRenderer,
-                            color: 'pink',
+                            color: '#23527c',
                             isDragable: false,
                             lineWidth: 1,
                             markerOptions: { style: "filledCircle", size: 3.0 }

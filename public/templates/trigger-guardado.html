@@ -1,4 +1,6 @@
-<select ng-show ="!triggershowguardado" class="form-control">
+<select ng-show ="!triggershowguardado" class="form-control" ng-model ="umbralguardadoselected" ng-repeat = "(key,value) in numbralesguardados" ng-change="umbralguardadoselect(umbralguardadoselected)">
+    <!--<option value="-1">Escoja un Umbral guardado</option>-->
+    <option value="{{key}}">{{value.nombre}}</option>
 </select>
 <div class="alert alert-warning" role="alert" ng-show="triggershowguardado">
     <strong> **Trigger no posee umbrales creados </strong>

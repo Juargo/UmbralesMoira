@@ -1,5 +1,5 @@
 angular.module("umbralesApp")
-    .directive("panelGrafico", function (week, trigger, plot) {
+    .directive("panelGrafico", function (week, trigger, plot, jsonumbral, $http) {
         return {
             restrinct: 'E',
             templateUrl: 'templates/panel-grafico.html',
@@ -16,16 +16,13 @@ angular.module("umbralesApp")
                     $scope.weekdefault = true;
                 }
 
-                $scope.tabactive = function (indi, event) {
+                $scope.tabactive = function (indi, event, value, numbralesguardados) {
+                    $scope.gdia = value;
                     plot.setshowbuttom(true);
                     $scope.showbuttom = plot.getshowbuttom();
                     $(".dias").removeClass("active");
                     elementName = $(event.target)[0].localName;
                     $(event.target).parent().addClass("active");
-
-
-
-                    formula1 = $scope.triggers[trigger.getntrigger()].replace(/ /g, "");
                     plot1 = plot.getPlot1();
                     plot2 = plot.getPlot2();
 
@@ -34,21 +31,23 @@ angular.module("umbralesApp")
                         plot2.destroy();
                     }
 
-                    getUrl(formula1, $scope.dias[indi].fi, $scope.dias[indi].ff);
-
-                    
+                    getUrl($scope.dias[indi].fi, $scope.dias[indi].ff, numbralesguardados, indi);
                 }
 
-                getUrl = function (urlg, fi, ff) {
+                getUrl = function (fi, ff, numbralesguardados, diaindex) {
                     var puntosn = [];
                     var pwu = []; //puntos warning up
                     var pwd = []; //puntos warning down
                     var pcu = []; //puntos critical up
                     var pcd = []; //puntos critical down
+                    urlg = $scope.triggers[trigger.getntrigger()].replace(/ /g, "");
                     //var urlg = "aliasByNode(summarize(gwpromo.compra.general.estado.Ok, \"10min\", \"sum\"), 4)"
                     //aliasByNode(summarize(gwpromo.compra.general.estado.Ok, "10min", "sum"), 4)
                     //console.log("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + fi)
                     //console.log(urlg);
+
+
+
                     $.get("http://localhost:3000/getdataGraph?formula=" + urlg + "&fi=" + fi + "&ff=" + ff, function (data, error) {
                         puntos = data[0].datapoints;
                         puntos = week.getOnly(puntos, ff.split("_")[2]);
@@ -60,18 +59,23 @@ angular.module("umbralesApp")
                                 var tt = tt.substr(0, 25);
                                 //ptos_c = puntos[i][0] + 0
                                 puntosn.push([tt, puntos[i][0]]);
-                                pwu.push([tt, puntos[i][0] * 1.2]);
-                                pwd.push([tt, puntos[i][0] * 0.2]);
-                                pcu.push([tt, puntos[i][0] * 1.5]);
-                                pcd.push([tt, puntos[i][0] * 0.5])
+                                if (numbralesguardados == '') {
+                                    pwu.push([tt, puntos[i][0] * 1.5]);
+                                    pwd.push([tt, puntos[i][0] * 0.5]);
+                                    pcu.push([tt, puntos[i][0] * 1.8]);
+                                    pcd.push([tt, puntos[i][0] * 0.2]);
+                                }
 
-                                // if (ptos_c < 10) {
-                                //     pw2.push([tt, 0]);
-                                // } else {
-                                //     pw2.push([tt, ptos_c * 0.5]);
-                                // }
+                            }
 
-                                // pw1.push([tt, puntos[i][0] * 1.5]);
+                            if (numbralesguardados != '') {
+                                indextrigger = trigger.getindextrigger();
+                                
+                                pwu = numbralesguardados[indextrigger].datapoint[diaindex].puntos["0"].warning["0"];
+                                pwd = numbralesguardados[indextrigger].datapoint[diaindex].puntos["0"].warning["1"];
+                                pcu = numbralesguardados[indextrigger].datapoint[diaindex].puntos["1"].critical["0"];
+                                pcd = numbralesguardados[indextrigger].datapoint[diaindex].puntos["1"].critical["1"];
+                                // console.log(numbralesguardados)
                             }
                             for (i = 0; i < puntosn.length; i++) {
                                 //console.log("p: " + puntosn[i] +  "   - u:" + pw1[i] + "  - d:" + pw2[i]);
@@ -84,11 +88,11 @@ angular.module("umbralesApp")
                         } else {
                             $scope.nodata = true;
                         }
-                    })
+                    });
                 }
 
 
-                $scope.warning = function(){
+                $scope.warning = function () {
                     plot1.series[1].show = true;
                     plot1.series[2].show = true;
                     plot1.series[3].show = false;
@@ -96,12 +100,47 @@ angular.module("umbralesApp")
                     plot1.replot();
                 }
 
-                $scope.critical = function(){
+                $scope.critical = function () {
                     plot1.series[1].show = false;
                     plot1.series[2].show = false;
                     plot1.series[3].show = true;
                     plot1.series[4].show = true;
                     plot1.replot();
+                }
+
+                $scope.All = function () {
+                    plot1.series[1].show = true;
+                    plot1.series[2].show = true;
+                    plot1.series[3].show = true;
+                    plot1.series[4].show = true;
+                    plot1.replot();
+                }
+
+
+                $scope.guardar = function (ndia, nombreUmbral) {
+                    idg = plot.getid();
+                    if (typeof idg == 'undefined') {
+                        jsonumbral.setjsonumbral({
+                            type: 'new',
+                            urlg: $scope.triggers[trigger.getntrigger()].replace(/ /g, ""),
+                            pwu: plot1.series[1].data,
+                            pwd: plot1.series[2].data,
+                            pcu: plot1.series[3].data,
+                            pcd: plot1.series[4].data,
+                            dias: week.getWeek(),
+                            ndia: ndia, //Día escogido a guardar
+                            nombreumbral: nombreUmbral,
+                            trigger: $(".triggerscroll").find(".active").find("h4").html()
+                        });
+
+                        $http.post("http://localhost:3000/insert", jsonumbral.getjsonumbral()).then(
+                            function (response) {
+                                var data = response.data;
+                                plot.setid(data);
+                            }, function (error) {
+                                var data = error.data;
+                            });
+                    }
                 }
             }
         }
