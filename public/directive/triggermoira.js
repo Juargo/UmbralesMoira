@@ -41,6 +41,8 @@ angular.module("umbralesApp")
                                 trigger.settriggerguardado(true);
                                 $scope.numbralesguardados = '';
                             } else {
+                                plot.setid(resp.data[0]._id);
+                                console.log(resp.data[0]._id);
                                 trigger.settriggerguardado(false);
                                 trigger.setntriggerguardado(resp.data[0].formulas);
                                 $scope.numbralesguardados = trigger.getntriggerguardado();
