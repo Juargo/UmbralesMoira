@@ -128,6 +128,14 @@ angular.module("umbralesApp")
 
 
                 $scope.guardar = function (ndia, nombreUmbral) {
+                    $("#dialog-message").dialog({
+                        modal: true,
+                        buttons: {
+                            Ok: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
                     idg = plot.getid();
 
                     jsonumbral.setjsonumbral({
@@ -145,14 +153,28 @@ angular.module("umbralesApp")
 
 
                     if (typeof idg == 'undefined') {
+                        console.log(jsonumbral.getjsonumbral());
                         $http.post("http://localhost:3000/insert", jsonumbral.getjsonumbral()).then(
                             function (response) {
                                 var data = response.data;
                                 plot.setid(data);
+                                jsonumbral.setmessageok(true);
+                                jsonumbral.setmessagenok(false);
+                                $scope.messageok = jsonumbral.getmessageok();
+                                $scope.messagenok = jsonumbral.getmessageok();
+                                console.log(data);
                             }, function (error) {
                                 var data = error.data;
+                                jsonumbral.setmessageok(false);
+                                jsonumbral.setmessagenok(true);
+                                $scope.messageok = jsonumbral.getmessageok();
+                                $scope.messagenok = jsonumbral.getmessageok();
+                                $scope.stringmessage = error.data;
+                                console.log(data);
                             });
                     } else {
+                        console.log(jsonumbral.getjsonumbral());
+                        console.log(plot.getid());
                         $http.put("http://localhost:3000/update/" + plot.getid(), jsonumbral.getjsonumbral());
                     }
                 }

@@ -163,11 +163,11 @@ angular.module("umbralesApp")
                 $.jqplot._noToImageButton = true;
 
 
-                    plot1.series[1].show = false;
-                    plot1.series[2].show = false;
-                    plot1.series[3].show = false;
-                    plot1.series[4].show = false;
-                    plot1.replot();
+                    // plot1.series[1].show = false;
+                    // plot1.series[2].show = false;
+                    // plot1.series[3].show = false;
+                    // plot1.series[4].show = false;
+                    // plot1.replot();
             }
 
         }

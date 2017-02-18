@@ -1,7 +1,21 @@
 angular.module("umbralesApp")
     .factory('jsonumbral', function () {
         umbral = undefined;
+        messageok = false;
+        messagenok = false;
         return {
+            getmessageok: function () {
+                return messageok;
+            },
+            getmessagenok: function () {
+                return messagenok;
+            },
+            setmessageok: function (a) {
+                messageok = a;;
+            },
+            setmessagenok: function (a) {
+                messagenok = a;
+            },
             getjsonumbral: function () {
                 return umbral;
             },
@@ -51,12 +65,12 @@ angular.module("umbralesApp")
                         dias0 = {
                             nombre: ddias[i].nombre,
                             puntos: [{
-                                warning: [datapwu,datapwd]
+                                warning: [datapwu, datapwd]
                             }, {
-                                critical: [datapcu,datapcd]
+                                critical: [datapcu, datapcd]
                             }]
                         }
-                    
+
                         dias.push(dias0);
                     }
 
@@ -70,9 +84,9 @@ angular.module("umbralesApp")
                     }
 
 
-                    
+
                 } else if (type == 'old') {
-                    
+
                 }
             }
         }
