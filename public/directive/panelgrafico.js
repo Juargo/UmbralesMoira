@@ -11,7 +11,7 @@ angular.module("umbralesApp")
                 $scope.triggershowguardado = trigger.gettriggerguardado();
                 $scope.nodata = false;
                 $scope.showbuttom = plot.getshowbuttom();
-
+                $scope.showname = false;
                 $scope.baseSelected = function (a) {
                     $scope.weekdefault = true;
                 }
@@ -65,22 +65,32 @@ angular.module("umbralesApp")
                                     pcu.push([tt, puntos[i][0] * 1.8]);
                                     pcd.push([tt, puntos[i][0] * 0.2]);
                                 }
-
                             }
 
                             if (numbralesguardados != '') {
                                 indextrigger = trigger.getindextrigger();
-                                
-                                pwu = numbralesguardados[indextrigger].datapoint[diaindex].puntos["0"].warning["0"];
-                                pwd = numbralesguardados[indextrigger].datapoint[diaindex].puntos["0"].warning["1"];
-                                pcu = numbralesguardados[indextrigger].datapoint[diaindex].puntos["1"].critical["0"];
-                                pcd = numbralesguardados[indextrigger].datapoint[diaindex].puntos["1"].critical["1"];
-                                // console.log(numbralesguardados)
+
+                                if (numbralesguardados[indextrigger].datapoint[diaindex].puntos["0"].warning["0"].length == 0) {
+                                    for (var i = 0; i < puntos.length; i++) {
+                                        var t = new Date(puntos[i][1] * 1000);
+                                        var tt = t.toGMTString();
+                                        var tt = tt.substr(0, 25);
+                                        //ptos_c = puntos[i][0] + 0
+
+                                        pwu.push([tt, puntos[i][0] * 1.5]);
+                                        pwd.push([tt, puntos[i][0] * 0.5]);
+                                        pcu.push([tt, puntos[i][0] * 1.8]);
+                                        pcd.push([tt, puntos[i][0] * 0.2]);
+                                    }
+                                } else {
+                                    pwu = numbralesguardados[indextrigger].datapoint[diaindex].puntos["0"].warning["0"];
+                                    pwd = numbralesguardados[indextrigger].datapoint[diaindex].puntos["0"].warning["1"];
+                                    pcu = numbralesguardados[indextrigger].datapoint[diaindex].puntos["1"].critical["0"];
+                                    pcd = numbralesguardados[indextrigger].datapoint[diaindex].puntos["1"].critical["1"];
+                                    // console.log(numbralesguardados)
+                                }
                             }
-                            for (i = 0; i < puntosn.length; i++) {
-                                //console.log("p: " + puntosn[i] +  "   - u:" + pw1[i] + "  - d:" + pw2[i]);
-                                //console.log("p: " + puntosn[i]);
-                            }
+
                             $.jqplot.config.enablePlugins = true;
                             data = [puntosn, pwu, pwd, pcu, pcd];
 
@@ -119,20 +129,22 @@ angular.module("umbralesApp")
 
                 $scope.guardar = function (ndia, nombreUmbral) {
                     idg = plot.getid();
-                    if (typeof idg == 'undefined') {
-                        jsonumbral.setjsonumbral({
-                            type: 'new',
-                            urlg: $scope.triggers[trigger.getntrigger()].replace(/ /g, ""),
-                            pwu: plot1.series[1].data,
-                            pwd: plot1.series[2].data,
-                            pcu: plot1.series[3].data,
-                            pcd: plot1.series[4].data,
-                            dias: week.getWeek(),
-                            ndia: ndia, //Día escogido a guardar
-                            nombreumbral: nombreUmbral,
-                            trigger: $(".triggerscroll").find(".active").find("h4").html()
-                        });
 
+                    jsonumbral.setjsonumbral({
+                        type: 'new',
+                        urlg: $scope.triggers[trigger.getntrigger()].replace(/ /g, ""),
+                        pwu: plot1.series[1].data,
+                        pwd: plot1.series[2].data,
+                        pcu: plot1.series[3].data,
+                        pcd: plot1.series[4].data,
+                        dias: week.getWeek(),
+                        ndia: ndia, //Día escogido a guardar
+                        nombreumbral: nombreUmbral,
+                        trigger: $(".triggerscroll").find(".active").find("h4").html()
+                    });
+
+
+                    if (typeof idg == 'undefined') {
                         $http.post("http://localhost:3000/insert", jsonumbral.getjsonumbral()).then(
                             function (response) {
                                 var data = response.data;
@@ -140,20 +152,8 @@ angular.module("umbralesApp")
                             }, function (error) {
                                 var data = error.data;
                             });
-                    }else{
-                        jsonumbral.setjsonumbral({
-                            type: 'new',
-                            pwu: plot1.series[1].data,
-                            pwd: plot1.series[2].data,
-                            pcu: plot1.series[3].data,
-                            pcd: plot1.series[4].data,
-                            dias: week.getWeek(),
-                            ndia: ndia, //Día escogido a guardar
-                            nombreumbral: nombreUmbral,
-                            trigger: $(".triggerscroll").find(".active").find("h4").html()
-                        });
-
-                        $http.put("http://localhost:3000/update/" +plot.getid() ,jsonumbral.getjsonumbral());
+                    } else {
+                        $http.put("http://localhost:3000/update/" + plot.getid(), jsonumbral.getjsonumbral());
                     }
                 }
             }

@@ -12,6 +12,8 @@ angular.module("umbralesApp")
                 );
 
                 $scope.triggerSelect = function (event, triggery) {
+                    $scope.nombreUmbral ='';
+                    $scope.showname=false;
                     $(".dias").removeClass("active");
                     plot.setshowbuttom(false);
                     $scope.showbuttom = plot.getshowbuttom();
@@ -37,6 +39,7 @@ angular.module("umbralesApp")
 
                     $http.get("http://localhost:3000/getbyname/" + triggery).then(
                         function (resp) {
+                             $scope.showname=true;
                             if (parseInt(resp.data.length, 10) == 0) {
                                 trigger.settriggerguardado(true);
                                 $scope.numbralesguardados = '';
